@@ -1,0 +1,9 @@
+# Workspace contents are gitignored (active document state)
+workspace/*
+!workspace/.gitkeep
+!workspace/grounding/
+workspace/grounding/*
+!workspace/grounding/.gitkeep
+
+# macOS
+.DS_Store
