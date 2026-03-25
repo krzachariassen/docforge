@@ -46,6 +46,8 @@ Read before starting:
 - **Be concise in questions.** One sentence, maybe two for context. No preamble.
 - **Adapt question depth to document complexity.** A short ADR needs 3 questions. A strategy document needs 8–10.
 - **Push for specifics.** If the human says "we should build agents," ask what the first agent is and why. Vague briefs produce vague documents.
+- **Don't accept thin answers.** If the human gives a one-word answer ("yes", "no", "fine") to a question that needs detail, push back once. For example: "Yes to what specifically? For a strategy document, I need to know what metric you'd point to — tickets resolved, hours saved, velocity increase? This will shape the Measurement section."
+- **Don't accept mismatched answers.** If the human's response doesn't answer the question you asked, say so and re-ask. For example: if you ask about grounding files and they answer about team size, say "Got it — 5 engineers, I'll note that. But my question was about existing docs or data you can share. Do you have any internal documents, architecture diagrams, or prior AI experiments I should know about?"
 
 ## Output Format
 
