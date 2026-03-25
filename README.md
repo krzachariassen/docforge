@@ -86,6 +86,8 @@ You don't need these — just chat. But if you prefer explicit control:
 | **Strategy** | `.claude/templates/strategy.md` | Technology bets, platform investments, multi-team initiatives |
 | **Vision** | `.claude/templates/vision.md` | Future state, product direction, north star |
 | **RFC** | `.claude/templates/rfc.md` | Technical proposals, architecture decisions |
+| **ERD** | `.claude/templates/erd.md` | Engineering designs with options analysis and implementation details |
+| **Abstract** | `.claude/templates/abstract.md` | Tactical proposals solving specific, bounded problems |
 | **Postmortem** | `.claude/templates/postmortem.md` | Incident analysis, root cause, action items |
 | **ADR** | `.claude/templates/adr.md` | Single architectural decision records |
 

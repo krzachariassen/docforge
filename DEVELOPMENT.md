@@ -10,7 +10,7 @@ The project consists of:
 1. **CLAUDE.md** — the auto-routing orchestrator (always active)
 2. **8 slash commands** (`.claude/commands/*.md`) — explicit command shortcuts
 3. **6 agent briefings** (`.claude/agents/*/AGENT.md`) — define each agent's behavior
-4. **5 document-type templates** (`.claude/templates/*.md`) — section structures
+4. **7 document-type templates** (`.claude/templates/*.md`) — section structures
 5. **1 memory file** (`.claude/memory/MEMORY.md`) — cross-session learnings
 6. **Supporting files** — common docs, rules, workspace skeleton
 
@@ -81,6 +81,8 @@ The `/df-*` commands in `.claude/commands/` are explicit shortcuts. They're opti
 - `.claude/templates/strategy.md`
 - `.claude/templates/vision.md`
 - `.claude/templates/rfc.md`
+- `.claude/templates/erd.md`
+- `.claude/templates/abstract.md`
 - `.claude/templates/postmortem.md`
 - `.claude/templates/adr.md`
 

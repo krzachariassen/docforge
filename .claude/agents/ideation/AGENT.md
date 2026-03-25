@@ -98,7 +98,7 @@ provide in workspace/grounding/ before drafting? Be specific.]
 **Out of scope**: [what it explicitly does not cover]
 
 ## Recommended Document Type
-[strategy / vision / rfc / postmortem / adr] — [one sentence why]
+[strategy / vision / rfc / erd / abstract / postmortem / adr] — [one sentence why]
 ```
 
 After writing, tell the human:

@@ -22,11 +22,12 @@ Read before starting:
 5. Identify the document type from the brief's "Recommended Document Type" (or use the argument override if provided)
 6. Read the corresponding template from `.claude/templates/`
 7. Check if the command argument includes "sections:" — if so, draft only those sections (see Sectional Drafting below)
-8. Use the brief's Structure Notes to extend the template with sub-sections, tables, and appendices
-9. Incorporate any Author-Specified Content from the brief verbatim or near-verbatim
-10. Produce the document
-11. Write to `workspace/draft-v1.md` (or the appropriate version if re-drafting sections)
-12. Update `MEMORY.md` if you discover something future drafters should know
+8. Map out the document structure: start with the template's core sections in their exact order, add conditional-core sections if their triggers are met, then add only the optional sections the brief's Structure Notes call for
+9. Use the brief's Structure Notes to extend sections with sub-sections, tables, and appendices — but do not change the section order or invent sections outside the template
+10. Incorporate any Author-Specified Content from the brief verbatim or near-verbatim
+11. Produce the document following the mapped structure
+12. Write to `workspace/draft-v1.md` (or the appropriate version if re-drafting sections)
+13. Update `MEMORY.md` if you discover something future drafters should know
 
 ## Sectional Drafting
 
@@ -54,9 +55,19 @@ This lets the human review and provide feedback section-by-section for complex d
 
 ## Rules
 
+### Template Adherence (non-negotiable)
+
+- **Follow the template's section order exactly.** Do not reorder sections. The template prescribes a deliberate sequence — problem before solution, design before plan. Respect it.
+- **Include every core section from the template.** Do not skip core sections, even if the brief doesn't mention them. If you have insufficient information for a section, write what you can and mark gaps with `<!-- NEEDS INPUT: [what's missing] -->`.
+- **Include conditional-core sections when their trigger criteria are met.** Read the template's guidance on when these sections become core. Place them where the template specifies.
+- **Only include optional sections that the brief's Structure Notes explicitly call for** or that the template says are triggered by the content. Do not invent sections that aren't in the template.
+- **Do not invent appendices.** Only create appendices that the brief's Structure Notes request or that the template's appendix guidance clearly calls for. Every appendix must be referenced from the main text.
+- **Follow the template's content prescriptions for each section.** If the template says "include component deep-dives" or "use code blocks for definitions," do that. The template's guidance on what each section should contain is as binding as the section order.
+
+### Content Quality
+
 - **Produce the FULL document, not an outline.** Every section has real prose, not placeholders. (Unless sectional drafting was requested.)
 - **Every major claim must be backed by evidence** from the research package or grounding files. Do not invent evidence.
-- **Follow the template's section structure** as a baseline, then extend it using the brief's Structure Notes. Add sub-sections, optional sections, and appendices as the brief directs.
 - **Match tone to the audience in the brief.** Technical audience = precise and specific. Leadership = clear framing and actionable asks.
 - **Match depth to the Document Depth field.** Blueprint = exhaustive. Pitch = concise. When in doubt, go deeper — it's easier to cut than to add.
 - **If evidence confidence is MEDIUM or LOW, bound the claim.** "Early evidence suggests..." not "It is proven that..."
