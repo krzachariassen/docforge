@@ -1,33 +1,62 @@
 # Postmortem Template
 
-For incident postmortems: service outages, data issues, security incidents, deployment failures, process breakdowns.
+For incident analysis: production outages, data loss, security events, near-misses worth documenting.
 
-**Audience**: Engineers and leadership who want to understand what happened, why, and what prevents recurrence. Blame-free, specific, action-oriented. Vague root causes and fuzzy action items are the failure mode of this document type.
+**Audience**: Engineering team and leadership. They want to understand what happened, why, and what's being done to prevent recurrence. They will push back on incomplete timelines, missing root causes, and action items without owners.
+
+**Typical depth**: 1,500–4,000 words. Thorough enough to prevent recurrence, concise enough to be read.
+
+**Human contribution required**: Postmortems are inherently grounded in internal data — the human must provide incident timelines, metrics, logs, and context. The AI can structure and write, but the facts come from the human.
 
 ---
 
-## Sections
+## Core Sections
 
 ### Summary
-3–5 sentences. What happened, when, what was the impact, what resolved it. Written for someone who wasn't involved.
+2–3 sentences. What happened, when, and the impact. A reader who stops here should understand the severity and scope.
 
 ### Impact
-Specific, quantified: duration (start and end with timezone), user/customer impact (how many, what they experienced), business impact (if quantifiable), data impact (if any).
+Quantified impact. Users affected, duration, revenue impact, SLA implications, data loss. Use numbers, not adjectives. "50,000 users unable to place orders for 47 minutes" not "significant user impact."
 
 ### Timeline
-Chronological log with precise timestamps. Include: when the incident started, when detected and how, key investigation steps, when mitigation began and what was done, when fully resolved, all significant actions in order.
+Chronological event log. Use a table or timestamped list:
+- **[Time]**: [Event] — [who did what or what system did what]
+
+Include: first signal, detection, escalation, mitigation attempts (including failed ones), resolution, all-clear. Be honest about delays.
 
 ### Root Cause
-The technical or process cause. Be specific. "A configuration change caused X to do Y" is better than "a configuration issue caused the outage." Describe the chain of failures if applicable.
+The technical root cause. Be precise — name the component, the code path, the configuration. Distinguish root cause from contributing factors. There should be one root cause (even if it's "a combination of X and Y created conditions where Z occurred").
 
 ### Contributing Factors
-Conditions that allowed the root cause to have this impact. Not excuses — systemic issues that, if addressed, reduce future risk. Missing alerts, missing safeguards, process gaps, knowledge gaps.
+What made the incident worse, harder to detect, or harder to fix? These are not the root cause, but they amplified the impact. Common examples: missing monitoring, incomplete runbooks, cascading failures, on-call response gaps.
 
 ### What Went Well
-Specific, honest. What worked during the incident? Important to preserve and reinforce.
+What worked during the incident response? Detection speed, team coordination, mitigation effectiveness. Be specific. This section builds trust and reinforces good practices.
 
 ### What Went Wrong
-Not just root cause — what made this worse than it needed to be?
+What failed during the incident response? Slow detection, missing alerts, inadequate runbooks, communication gaps. Be direct — this is not the place for hedging.
 
 ### Action Items
-Each item requires: **What** (specific, concrete), **Owner** (person's name), **Due date** (specific date), **Priority** (P0/P1/P2). Unowned or undated action items do not get done.
+Table format with columns: Action, Owner, Priority (P0/P1/P2), Due Date, Status.
+
+Every action item must have an owner and a date. "Improve monitoring" is not an action item. "Add latency p99 alert for payment-service with 500ms threshold — @jane — P0 — 2026-04-01" is.
+
+## Optional Sections
+
+### Detection Analysis
+How was the incident detected? Was it automated alerting, customer reports, or an engineer noticing? What should have detected it earlier?
+
+### Customer Communication
+What was communicated to customers and when? Was the communication timely and accurate?
+
+### Appendix: Metrics and Logs
+Supporting data that's too detailed for the main body: error rate graphs, log excerpts, configuration diffs.
+
+---
+
+## Format Guidance
+
+- **Use timestamps consistently.** Pick one timezone and stick to it. Include timezone abbreviation.
+- **Use tables** for timelines, action items, and impact summaries.
+- **Be blame-free but specific.** Name systems and processes, not people. "The deployment pipeline lacked a canary step" not "someone deployed without checking."
+- **Link action items to findings.** Every "what went wrong" should have a corresponding action item.
