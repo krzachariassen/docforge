@@ -1,36 +1,78 @@
 # RFC Template
 
-For Request for Comment documents: technical design proposals, API changes, infrastructure decisions, process changes affecting multiple teams.
+For technical proposals that need team or cross-team review: new systems, protocol changes, architectural decisions, process changes.
 
-**Audience**: Engineers and technical leads who will implement, integrate with, or be affected by this change. They want technical specificity, clear trade-off analysis, and explicit consideration of alternatives. They will ask "why not X?" — answer it before they do.
+**Audience**: Engineers and tech leads. They want precise technical detail, honest trade-off analysis, and enough information to evaluate alternatives. They will challenge hand-waving and missing edge cases.
+
+**Typical depth**: 2,000–6,000 words. Deep enough to evaluate, not so long that reviewers skip sections.
+
+**Human contribution required**: RFCs need the human to provide technical specifics — interface definitions, schema examples, benchmark data. The AI can structure the argument and fill in analysis, but the core technical design comes from the human.
 
 ---
 
-## Sections
+## Core Sections
 
 ### Summary
-One paragraph. What are you proposing and why? Enough for a reviewer to understand scope before reading details.
+One paragraph. What's being proposed and why. A reader who stops here should understand the change and its motivation.
 
 ### Motivation
-What problem are you solving? Current behavior and costs. Concrete examples (real cases, not hypotheticals). Why now vs. later.
+Why is this change needed? What's broken, missing, or suboptimal? Be specific — name the system, the failure mode, the cost. Include data if available.
 
 ### Proposed Solution
-The full technical design: how it works (system model, data flow, interfaces), key design decisions and reasoning, examples (code snippets, API signatures, config as appropriate), what changes for existing users.
+The technical design. Use sub-sections for complex proposals:
+- **Overview**: How it works at a high level
+- **Design details**: Data models, interfaces, protocols, algorithms
+- **Key decisions**: Why this approach over alternatives (brief — detailed analysis goes in Alternatives Considered)
 
 ### Alternatives Considered
-**Required.** For each alternative: what it is, why it was considered, why it was not chosen. At minimum: "doing nothing" and the most obvious alternative to your proposal.
+For each alternative: what it is, its advantages, and why it was rejected. Be fair — if an alternative was close, say so. This section builds trust.
 
 ### Design Details
-Additional technical depth: implementation notes, edge cases, error handling, performance characteristics.
+Deep technical specifics. This is where code examples, schema definitions, interface contracts, and protocol descriptions go. Use code blocks and tables.
 
 ### Trade-offs
-What does this proposal give up? Name costs honestly: what gets more complex, what it won't support, what you're uncertain about.
+What does this proposal sacrifice? Performance vs. complexity? Consistency vs. availability? Flexibility vs. safety? Name the trade-offs explicitly and explain why the chosen trade-off is acceptable.
 
 ### Migration / Rollout Plan
-How do we get from here to there? Phases, backward compatibility, how existing users migrate, feature flags and gradual rollout.
+How do we get from here to there? Phased rollout, feature flags, backward compatibility. Address: what happens to existing data, existing clients, and existing behavior.
 
 ### Rollback Plan
-If this goes wrong: rollback triggers, rollback procedure, what state changes would be permanent.
+How do we undo this if it goes wrong? Be specific — not "we can roll back" but "revert commit X, restore config Y, run migration Z."
 
 ### Open Questions
-Unresolved questions for reviewers. Tag with decision owner if known.
+Unresolved decisions the RFC is surfacing for discussion. Number them. Each should be a real question, not a rhetorical one.
+
+## Optional Sections
+
+### Performance Analysis
+Benchmarks, load testing results, capacity planning. Use tables for comparisons.
+
+### Security Considerations
+New attack surfaces, access control changes, data handling implications.
+
+### Appendix: Interface Definitions
+Full protobuf/IDL definitions, API contracts, or schema definitions that would interrupt the main flow.
+
+---
+
+## Recommended Drafting Order
+
+For complex RFCs, use sectional drafting:
+
+**Round 1** — The proposal: `sections:summary,motivation,proposed-solution`
+Draft the problem and the proposed design. The human reviews before the detail sections are written.
+
+**Round 2** — The details: `sections:alternatives-considered,design-details,trade-offs`
+The technical depth. The human may need to add interface definitions or benchmark data via grounding files between rounds.
+
+**Round 3** — The plan: `sections:migration,rollback,open-questions` + any optional sections
+The execution and operational details.
+
+---
+
+## Format Guidance
+
+- **Use code blocks** for anything the reader needs to see exactly: APIs, schemas, configs, commands.
+- **Use tables** for alternative comparisons, trade-off matrices, and migration phase summaries.
+- **Use ASCII diagrams** for system interactions, data flows, and sequence diagrams.
+- **Be precise about scope.** RFCs that try to solve everything get rejected. Narrow scope = faster approval.

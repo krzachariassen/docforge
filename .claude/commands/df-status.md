@@ -17,11 +17,13 @@ Check `workspace/` for the following files and report status:
 Then determine the current stage and recommended next command:
 
 - **No files** → Run `/df-ideation "your idea"` to begin
-- **brief.md only** → Run `/df-research`
-- **brief + research, no draft** → (Optionally add files to `workspace/grounding/`) Run `/df-draft`
-- **draft exists, no matching review** → Run `/df-review`
-- **review exists, no newer draft** → Read `workspace/review-vN.md`, then run `/df-edit "your feedback"`
+- **brief.md only** → Add grounding files to `workspace/grounding/`, then run `/df-research`
+- **brief + research, no draft** → Review the Grounding Assessment in `research.md`. Add any missing grounding files, then run `/df-draft`
+- **draft exists, no matching review** → Run `/df-review` (or `/df-review structural` / `substance` / `audience` for a focused review)
+- **review exists, no newer draft** → Read `workspace/review-vN.md`, then run `/df-edit "your feedback"` — you can accept/reject findings AND add new content
 - **multiple drafts, no FINAL.md** → Run `/df-review` for another cycle, or `/df-polish` if content is ready
 - **FINAL.md exists** → Pipeline complete. Document at `workspace/FINAL.md`
+
+**At any point**: Run `/df-supplement` to add context, content, or direction to the pipeline.
 
 Show the recommended next command clearly.

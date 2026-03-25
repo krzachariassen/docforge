@@ -1,127 +1,125 @@
 # DocForge
 
-A multi-agent document writing system built entirely with Claude Code custom commands. No application code. No Python. No infrastructure. Just `.claude/commands/` markdown files and agent briefing documents.
-
-## What This Is
-
-DocForge uses the same pattern as any Claude Code custom command (`/pr_create`, `/diff-coverage`, etc.): a markdown file in `.claude/commands/` that instructs Claude to follow a structured process. The difference is that DocForge defines a **multi-stage pipeline** where each stage is a separate command with a separate agent briefing, and the human orchestrates the flow by invoking commands in sequence.
+A document writing partner built with Claude Code. No application code — just markdown files that turn Claude into a structured writing collaborator.
 
 ## How It Works
 
-The engineer runs commands in sequence. Each command instructs Claude to read a specific agent briefing, load the artifacts from previous stages, and produce the next artifact.
+Open this project and start chatting. DocForge automatically knows what stage you're at and what to do next.
 
 ```
-Human runs /df-ideation "my raw idea..."
-  → Claude reads agents/ideation/AGENT.md
-  → Claude asks clarifying questions
-  → Claude produces workspace/brief.md
+You:    "I want to write a strategy doc about treating AI as specialized
+         engineers instead of one general assistant"
 
-Human runs /df-research
-  → Claude reads agents/researcher/AGENT.md
-  → Claude reads workspace/brief.md
-  → Claude produces workspace/research.md
+Claude: [Assesses complexity → asks clarifying questions one at a time]
+Claude: [After 8-10 questions → produces workspace/brief.md]
+Claude: "Brief saved. Add grounding files and do your own research, then
+         we'll validate your claims."
 
-Human runs /df-draft
-  → Claude reads agents/drafter/AGENT.md
-  → Claude reads workspace/brief.md + workspace/research.md + workspace/grounding/*
-  → Claude produces workspace/draft-v1.md
+You:    [Copy existing docs, system inventories, research to workspace/grounding/]
+You:    "Ready, validate my claims"
 
-Human runs /df-review
-  → Claude reads agents/reviewer/AGENT.md
-  → Claude reads workspace/draft-v1.md ONLY (no brief, no research -- cold read)
-  → Claude produces workspace/review-v1.md
+Claude: [Reads brief + grounding files → validates every claim]
+Claude: [Produces workspace/research.md with evidence + gaps]
+Claude: "Your grounding is solid. Missing: KTLO volume data. Ready to draft?"
 
-Human reviews the critique, decides what to accept/reject
+You:    "Draft the problem statement and proposed approach first"
 
-Human runs /df-edit "accept findings 1,3,5 -- reject 2,4"
-  → Claude reads agents/editor/AGENT.md
-  → Claude reads workspace/draft-v1.md + the human's feedback
-  → Claude produces workspace/draft-v2.md
+Claude: [Sectional drafting → produces first sections of workspace/draft-v1.md]
+Claude: "First sections ready. Review them, then we'll draft architecture."
 
-(Optional: loop /df-review + /df-edit again)
+You:    "Looks good. Draft the architecture section. Here's the agent
+         definition I want included verbatim: [code block]"
 
-Human runs /df-polish
-  → Claude reads agents/polish/AGENT.md
-  → Claude reads latest draft
-  → Claude produces workspace/FINAL.md
+Claude: [Drafts architecture with author-specified content → adds to draft]
+
+You:    "Review the full document for substance"
+
+Claude: [Cold read — no brief/research context → focused substance review]
+Claude: [Produces workspace/review-v1.md with findings]
+
+You:    "Accept 1,3,5. Reject 2. Also add a governance section — here's
+         what I want in it: autonomy policy, security, kill switch..."
+
+Claude: [Implements finding fixes + author-directed content → workspace/draft-v2.md]
+
+You:    "Polish it"
+
+Claude: [Final pass → workspace/FINAL.md]
 ```
 
-## Key Design Decisions
+No commands to remember. You just talk. Claude figures out the stage and routes to the right agent.
 
-1. **No application code.** Everything is Claude commands and markdown agent briefings. The human is the orchestrator.
-2. **Each stage is a separate command.** The human decides when to move to the next stage, what feedback to accept, and when to loop.
-3. **Agents are briefing documents.** Each agent's entire behavior is defined in its `AGENT.md` file -- same pattern as the INCA AI Engineering Strategy.
-4. **The workspace directory is the state.** All artifacts (brief, research, drafts, reviews) are markdown files in `workspace/`. No database, no session management.
-5. **Grounding files are explicit.** The human copies relevant files into `workspace/grounding/` before running `/df-draft`. The drafter reads everything in that directory.
+## The Human's Role
+
+DocForge is a **collaboration framework**. The quality depends on what you put in:
+
+| What you provide | How it enters the pipeline |
+|-----------------|---------------------------|
+| Your raw thinking | Chat naturally — the ideation agent draws it out |
+| Internal context (existing docs, inventories, metrics) | Copy files to `workspace/grounding/` |
+| External research (industry data, competitive analysis) | Use ChatGPT Deep Research, Perplexity, Google Scholar, or whatever you prefer — save results to `workspace/grounding/` |
+| Specific content (code, definitions, examples, tables) | Tell the editor to include it, or add to `workspace/grounding/author-content.md` |
+| Judgment and direction | Accept/reject review findings, direct expansions, set priorities |
+| Memory curation | Decide which learnings persist for future sessions |
+
+For a short ADR, you might provide a brain dump and a few answers. For a Blueprint strategy document, expect to be actively involved throughout — detailed answers, grounding files, research, content injection, and review feedback.
+
+## Slash Commands (Optional)
+
+You don't need these — just chat. But if you prefer explicit control:
+
+| Command | What it does |
+|---------|-------------|
+| `/df-ideation "brain dump"` | Start ideation |
+| `/df-research` | Validate claims |
+| `/df-draft` | Draft (or `sections:1-3` for sectional drafting) |
+| `/df-review` | Adversarial review (or `structural` / `substance` / `audience`) |
+| `/df-edit "feedback"` | Edit with feedback |
+| `/df-polish` | Final polish |
+| `/df-supplement "additions"` | Add context mid-pipeline |
+| `/df-status` | Show pipeline state |
+
+## Document Types
+
+| Type | Template | When to use |
+|------|----------|-------------|
+| **Strategy** | `.claude/templates/strategy.md` | Technology bets, platform investments, multi-team initiatives |
+| **Vision** | `.claude/templates/vision.md` | Future state, product direction, north star |
+| **RFC** | `.claude/templates/rfc.md` | Technical proposals, architecture decisions |
+| **Postmortem** | `.claude/templates/postmortem.md` | Incident analysis, root cause, action items |
+| **ADR** | `.claude/templates/adr.md` | Single architectural decision records |
+
+## Getting Started
+
+1. Open this folder in your IDE with Claude
+2. Start chatting about what you want to write
+3. Add grounding files to `workspace/grounding/` when prompted
+4. Follow the conversation through the pipeline
+5. Your finished document is at `workspace/FINAL.md`
 
 ## Project Structure
 
 ```
 docforge/
+├── CLAUDE.md                    # Auto-routing orchestrator (always active)
+├── DEVELOPMENT.md               # Instructions for modifying DocForge itself
 ├── .claude/
-│   └── commands/                    # Claude Code custom commands
-│       ├── df-ideation.md           # Stage 1: Brain dump → Structured brief
-│       ├── df-research.md           # Stage 2: Brief → Evidence package
-│       ├── df-draft.md              # Stage 3: Brief + research + grounding → Draft
-│       ├── df-review.md             # Stage 4: Draft → Adversarial critique
-│       ├── df-edit.md               # Stage 5: Draft + feedback → Revised draft
-│       ├── df-polish.md             # Stage 6: Final pass → FINAL.md
-│       └── df-status.md             # Utility: Show pipeline status
-│
-├── agents/                          # Agent briefing documents
-│   ├── ideation/
-│   │   └── AGENT.md                 # Ideation Partner role, process, output format
-│   ├── researcher/
-│   │   └── AGENT.md                 # Research Agent role, process, output format
-│   ├── drafter/
-│   │   └── AGENT.md                 # Drafter role, process, output format
-│   ├── reviewer/
-│   │   └── AGENT.md                 # Adversarial Reviewer role, process, output format
-│   ├── editor/
-│   │   └── AGENT.md                 # Editor role, process, output format
-│   └── polish/
-│       └── AGENT.md                 # Polish Agent role, process, output format
-│
-├── templates/                       # Document-type structure templates
-│   ├── strategy.md                  # Strategy document section structure
-│   ├── vision.md                    # Vision document section structure
-│   ├── rfc.md                       # RFC section structure
-│   ├── postmortem.md                # Postmortem section structure
-│   └── adr.md                       # Architecture Decision Record structure
-│
-├── memory/
-│   └── MEMORY.md                    # Cross-session operational learnings
-│
-├── workspace/                       # Active document workspace (gitignored)
-│   ├── brief.md                     # Stage 1 output
-│   ├── research.md                  # Stage 2 output
-│   ├── grounding/                   # Files the human adds for context
-│   ├── draft-v1.md                  # Stage 3 output
-│   ├── review-v1.md                 # Stage 4 output
-│   ├── draft-v2.md                  # Stage 5 output (after first edit)
-│   ├── review-v2.md                 # Stage 4 output (second review cycle)
-│   ├── draft-v3.md                  # Stage 5 output (after second edit)
-│   └── FINAL.md                     # Stage 6 output
-│
-├── CLAUDE.md                        # Build instructions for the agent
-├── README.md                        # This file
-└── .gitignore
+│   ├── commands/                # Slash command shortcuts (optional)
+│   ├── agents/                  # Agent briefings
+│   │   ├── ideation/AGENT.md
+│   │   ├── researcher/AGENT.md
+│   │   ├── drafter/AGENT.md
+│   │   ├── reviewer/AGENT.md
+│   │   ├── editor/AGENT.md
+│   │   └── polish/AGENT.md
+│   ├── templates/               # Document-type templates
+│   ├── memory/MEMORY.md         # Cross-session learnings
+│   └── rules/                   # Behavioral rules
+└── workspace/                   # Active document session (gitignored)
+    ├── brief.md
+    ├── research.md
+    ├── grounding/               # Your context files go here
+    ├── draft-v*.md
+    ├── review-v*.md
+    └── FINAL.md
 ```
-
-## Getting Started
-
-1. Open this folder in Cursor
-2. Run `/df-ideation` with your raw idea
-3. Follow the pipeline stage by stage
-4. Your finished document is at `workspace/FINAL.md`
-
-## The Pipeline
-
-| Command | Agent | Input | Output | Human Action |
-|---------|-------|-------|--------|-------------|
-| `/df-ideation` | Ideation Partner | Your raw brain dump | `workspace/brief.md` | Answer clarifying questions |
-| `/df-research` | Research Agent | `brief.md` | `workspace/research.md` | Review evidence, add grounding files to `workspace/grounding/` |
-| `/df-draft` | Drafter | `brief.md` + `research.md` + `grounding/*` + template | `workspace/draft-v1.md` | Read the draft |
-| `/df-review` | Adversarial Reviewer | Latest draft ONLY | `workspace/review-vN.md` | Read the critique, decide what to accept |
-| `/df-edit` | Editor | Latest draft + your feedback | `workspace/draft-vN.md` | Review the edits |
-| `/df-polish` | Polish Agent | Latest draft + `memory/MEMORY.md` | `workspace/FINAL.md` | Final review, accept memory suggestions |
