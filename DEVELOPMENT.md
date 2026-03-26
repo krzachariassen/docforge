@@ -8,9 +8,9 @@ DocForge is a **Claude Code custom commands project**. There is NO application c
 
 The project consists of:
 1. **CLAUDE.md** — the auto-routing orchestrator (always active)
-2. **8 slash commands** (`.claude/commands/*.md`) — explicit command shortcuts
-3. **6 agent briefings** (`.claude/agents/*/AGENT.md`) — define each agent's behavior
-4. **7 document-type templates** (`.claude/templates/*.md`) — section structures
+2. **9 slash commands** (`.claude/commands/*.md`) — explicit command shortcuts
+3. **7 agent briefings** (`.claude/agents/*/AGENT.md`) — define each agent's behavior
+4. **9 document/presentation templates** (`.claude/templates/*.md`) — section and slide structures
 5. **1 memory file** (`.claude/memory/MEMORY.md`) — cross-session learnings
 6. **Supporting files** — common docs, rules, workspace skeleton
 
@@ -76,6 +76,7 @@ The `/df-*` commands in `.claude/commands/` are explicit shortcuts. They're opti
 - `.claude/agents/reviewer/AGENT.md`
 - `.claude/agents/editor/AGENT.md`
 - `.claude/agents/polish/AGENT.md`
+- `.claude/agents/presenter/AGENT.md`
 
 ### Templates
 - `.claude/templates/strategy.md`
@@ -85,6 +86,8 @@ The `/df-*` commands in `.claude/commands/` are explicit shortcuts. They're opti
 - `.claude/templates/abstract.md`
 - `.claude/templates/postmortem.md`
 - `.claude/templates/adr.md`
+- `.claude/templates/deck-from-document.md`
+- `.claude/templates/strategy-review.md`
 
 ### Commands
 - `.claude/commands/df-ideation.md`
@@ -93,6 +96,7 @@ The `/df-*` commands in `.claude/commands/` are explicit shortcuts. They're opti
 - `.claude/commands/df-review.md`
 - `.claude/commands/df-edit.md`
 - `.claude/commands/df-polish.md`
+- `.claude/commands/df-present.md`
 - `.claude/commands/df-supplement.md`
 - `.claude/commands/df-status.md`
 

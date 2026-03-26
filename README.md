@@ -104,6 +104,7 @@ You don't need these — just chat. But if you prefer explicit control:
 | `/df-review` | Adversarial review (or `structural` / `substance` / `audience`) |
 | `/df-edit "feedback"` | Edit with feedback |
 | `/df-polish` | Final polish |
+| `/df-present` | Build a slide deck (from document or from scratch) |
 | `/df-supplement "additions"` | Add context mid-pipeline |
 | `/df-status` | Show pipeline state |
 
@@ -117,6 +118,9 @@ You don't need these — just chat. But if you prefer explicit control:
 | **ERD** | `.claude/templates/erd.md` | Engineering designs with options analysis and implementation details |
 | **Abstract** | `.claude/templates/abstract.md` | Tactical proposals solving specific, bounded problems |
 | **Postmortem** | `.claude/templates/postmortem.md` | Incident analysis, root cause, action items |
+| | | |
+| **Deck from Document** | `.claude/templates/deck-from-document.md` | Convert any finished document into a presentation |
+| **Strategy Review** | `.claude/templates/strategy-review.md` | Monthly/quarterly leadership review decks |
 | **ADR** | `.claude/templates/adr.md` | Single architectural decision records |
 
 ## Getting Started
