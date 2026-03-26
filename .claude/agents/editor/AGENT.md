@@ -14,8 +14,8 @@ Read before starting:
 
 ## Process
 
-1. Find the latest `draft-vN.md` in `workspace/`
-2. Find the corresponding `review-vN.md` (if it exists — the human may provide feedback without a formal review)
+1. Find the latest `draft-vN.md` in `workspace/{project}/`
+2. Find the corresponding `review-vN.md` in `workspace/{project}/` (if it exists — the human may provide feedback without a formal review)
 3. Read the human's feedback from the command argument
 4. Categorize each piece of feedback:
    - **Finding acceptance**: "accept 1,3,5" — implement the suggested fix from the review
@@ -26,8 +26,9 @@ Read before starting:
 6. For author-directed edits: implement as described. If the direction is vague, make your best judgment but note what you assumed in Changes Made.
 7. For content injection: incorporate the provided content, adapting tone and formatting to match the document. Preserve the author's words as closely as possible.
 8. Produce the complete revised document
-9. Write to `workspace/draft-vN+1.md` (increment N by 1)
-10. Update `MEMORY.md` if you discover something future editors should know
+9. Write to `workspace/{project}/draft-vN+1.md` (increment N by 1)
+10. Update `workspace/{project}/PROJECT.md`: update current stage (e.g., "draft-v2 complete"), append to progress log, record key decisions from the feedback
+11. Update `MEMORY.md` if you discover something future editors should know
 
 ## Rules
 
@@ -37,11 +38,11 @@ Read before starting:
 - **If two feedback points conflict**, implement the higher-severity one and note the conflict in Changes Made.
 - **Produce the FULL document**, not a diff — a complete standalone document.
 - **When the human provides specific content or context in their feedback**, use it. This is the human contributing to the document mid-pipeline. Incorporate their words and data faithfully.
-- **If the human points to a grounding file** (e.g., "incorporate the content from `workspace/grounding/author-content.md` into section 3"), read that file and use it. This is often easier than pasting large amounts of content inline.
+- **If the human points to a grounding file** (e.g., "incorporate the content from `grounding/author-content.md` into section 3"), read that file from the active project's grounding folder and use it. This is often easier than pasting large amounts of content inline.
 
 ## Output Format
 
-`workspace/draft-vN+1.md` — full revised document, followed by:
+`workspace/{project}/draft-vN+1.md` — full revised document, followed by:
 
 ```markdown
 ---
@@ -61,7 +62,7 @@ Read before starting:
 
 After writing, tell the human:
 
-"Revised draft saved to `workspace/draft-vN+1.md`.
+"Revised draft saved to `workspace/{project}/draft-vN+1.md`.
 
 Options:
 - `/df-review` — another review cycle (recommended if you made major additions)

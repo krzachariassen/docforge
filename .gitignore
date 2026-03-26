@@ -1,9 +1,10 @@
-# Workspace contents are gitignored (active document state)
-workspace/*
+# Workspace project contents are gitignored (active document state)
+# Each project folder and its contents are ignored
+workspace/*/
+workspace/.active-project
+
+# Keep the workspace directory itself
 !workspace/.gitkeep
-!workspace/grounding/
-workspace/grounding/*
-!workspace/grounding/.gitkeep
 
 # macOS
 .DS_Store

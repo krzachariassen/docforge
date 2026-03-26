@@ -14,6 +14,45 @@ Read before starting:
 
 ## Process
 
+### Project Setup (if starting a new project)
+
+If no active project exists or the human is starting a new document:
+
+1. Ask the human for a **short project name** — a slug that will become the folder name. Guide them: "Give this project a short name — something like `erd-catalog-notifications` or `inca-strategy-review`. This becomes the project folder name."
+2. Create the project directory: `workspace/{slug}/` and `workspace/{slug}/grounding/`
+3. Write the slug to `workspace/.active-project`
+4. Create `workspace/{slug}/PROJECT.md` with initial metadata:
+
+```markdown
+# Project: [Human-readable name]
+
+**Type**: [to be determined during ideation]
+**Created**: [today's date]
+**Audience**: [to be determined during ideation]
+**Current Stage**: ideation
+
+## Progress Log
+
+### Session 1 — [today's date]
+Project created. Beginning ideation.
+
+## Key Decisions
+(none yet)
+
+## Open Items
+- [ ] Complete ideation and produce brief
+- [ ] Add grounding files
+
+## Human Preferences
+(none yet)
+```
+
+5. Then proceed to ideation below.
+
+If an active project already exists and has no brief.md, proceed directly to ideation.
+
+### Ideation
+
 1. Read the human's brain dump (provided as the command argument)
 2. Assess document complexity:
    - **Simple** (opinion piece, short ADR, focused RFC): 3–5 questions, standard brief
@@ -35,7 +74,8 @@ Read before starting:
    - What internal context or data should ground this document? (existing docs, metrics, system inventories)
 
 4. When the human signals done ("done", "that's it", "go ahead", "produce the brief") — produce the structured brief immediately
-5. Write to `workspace/brief.md`
+5. Write to `workspace/{project}/brief.md`
+6. Update `workspace/{project}/PROJECT.md`: set the document type, audience, update the progress log, and record any key decisions made during ideation
 
 ## Rules
 
@@ -51,7 +91,7 @@ Read before starting:
 
 ## Output Format
 
-`workspace/brief.md`:
+`workspace/{project}/brief.md`:
 
 ```markdown
 # Document Brief
@@ -91,7 +131,7 @@ If none, write "None — drafter has full discretion."]
 
 ## Grounding Context Needed
 [What internal data, existing documents, or system context should the human
-provide in workspace/grounding/ before drafting? Be specific.]
+provide in the project's grounding/ folder before drafting? Be specific.]
 
 ## Scope
 **In scope**: [what the document covers]
@@ -103,9 +143,9 @@ provide in workspace/grounding/ before drafting? Be specific.]
 
 After writing, tell the human:
 
-"Brief saved to `workspace/brief.md`. Before moving on:
-1. **Add grounding files** to `workspace/grounding/` — the more context you provide, the stronger the document. [List specific files suggested in the Grounding Context Needed section]
-2. **Do your own research** if the document needs industry data, competitive analysis, or market context. Use whatever tools you prefer — ChatGPT Deep Research, Perplexity, Google Scholar, internal wikis, expert conversations. Save the results to `workspace/grounding/` alongside your other files.
-3. Then run `/df-research` to validate your claims.
+"Brief saved to `workspace/{project}/brief.md`. Before moving on:
+1. **Add grounding files** to `workspace/{project}/grounding/` — the more context you provide, the stronger the document. [List specific files suggested in the Grounding Context Needed section]
+2. **Do your own research** if the document needs industry data, competitive analysis, or market context. Use whatever tools you prefer — ChatGPT Deep Research, Perplexity, Google Scholar, internal wikis, expert conversations. Save the results to `workspace/{project}/grounding/` alongside your other files.
+3. Then tell me to validate your claims or run `/df-research`.
 
-The quality of the final document depends on what you put into `workspace/grounding/`. For strategy documents: existing docs, system inventories, metrics, external research, and anything that makes claims concrete rather than generic."
+The quality of the final document depends on what you put into `workspace/{project}/grounding/`. For strategy documents: existing docs, system inventories, metrics, external research, and anything that makes claims concrete rather than generic."

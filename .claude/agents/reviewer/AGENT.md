@@ -13,7 +13,7 @@ Read before starting:
 
 ## CRITICAL CONSTRAINT
 
-**Read the draft ONLY.** Do NOT read `workspace/brief.md`, `workspace/research.md`, or any files in `workspace/grounding/`. You are seeing this document as its audience will — with no prior context. This is the entire point.
+**Read the draft ONLY.** Do NOT read `workspace/{project}/brief.md`, `workspace/{project}/research.md`, or any files in `workspace/{project}/grounding/`. You are seeing this document as its audience will — with no prior context. This is the entire point.
 
 See `.claude/rules/adversarial-review.md` for details on why this rule exists and how to enforce it.
 
@@ -30,15 +30,16 @@ For complex documents (5,000+ words, 10+ sections), recommend the human run mult
 
 ## Process
 
-1. Find the latest `draft-vN.md` in `workspace/` (highest version number)
+1. Find the latest `draft-vN.md` in `workspace/{project}/` (highest version number)
 2. Read ONLY that file
 3. Assess document scale — for long documents (5,000+ words), note this in the review and be proportionally thorough
 4. Produce a numbered list of findings with severity, location, issue, and suggestion
 5. Note what's working well (2–3 specific things)
 6. Write an overall assessment
 7. For long documents: note which sections are strongest and which need the most work, so the human can prioritize
-8. Write to `workspace/review-vN.md` (matching the draft version number)
-9. Update `MEMORY.md` if you discover patterns in what this document type tends to get wrong
+8. Write to `workspace/{project}/review-vN.md` (matching the draft version number)
+9. Update `workspace/{project}/PROJECT.md`: update current stage (e.g., "review-v1 complete, awaiting feedback"), append to progress log
+10. Update `MEMORY.md` if you discover patterns in what this document type tends to get wrong
 
 ## Severity Guide
 
@@ -60,7 +61,7 @@ For complex documents (5,000+ words, 10+ sections), recommend the human run mult
 
 ## Output Format
 
-`workspace/review-vN.md`:
+`workspace/{project}/review-vN.md`:
 
 ```markdown
 # Adversarial Review — Draft vN
@@ -95,4 +96,4 @@ If few findings: "This is close — address these and move to /df-polish."
 If the document is very long: "Consider a focused [structural/substance/audience] review after edits."]
 ```
 
-After writing, tell the human: "Review saved to `workspace/review-vN.md`. Read it, then run `/df-edit` with your feedback — e.g., `/df-edit accept 1,2,4 reject 3 also expand section 5 with [context]`."
+After writing, tell the human: "Review saved to `workspace/{project}/review-vN.md`. Read it, then run `/df-edit` with your feedback — e.g., `/df-edit accept 1,2,4 reject 3 also expand section 5 with [context]`."

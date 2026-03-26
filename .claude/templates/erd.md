@@ -8,7 +8,7 @@ ERDs are the most technically rigorous document type. They don't just propose a 
 
 **Typical depth**: 3,000–10,000+ words. ERDs are the densest document type — architecture diagrams, proto definitions, code snippets, latency analysis, storage calculations, capacity projections, and step-by-step implementation plans. Every section earns its place through specificity.
 
-**Human contribution required**: ERDs are deeply grounded in system internals. The human must provide: architecture context (how the system works today), current metrics (latency P50/P99, RPS, storage, error rates), proto/API definitions, code references, data analysis results, and any prior ERDs or design docs. Without this grounding, the ERD will be too generic to pass review. Save everything to `workspace/grounding/`.
+**Human contribution required**: ERDs are deeply grounded in system internals. The human must provide: architecture context (how the system works today), current metrics (latency P50/P99, RPS, storage, error rates), proto/API definitions, code references, data analysis results, and any prior ERDs or design docs. Without this grounding, the ERD will be too generic to pass review. Save everything to the project's `grounding/` folder.
 
 ---
 

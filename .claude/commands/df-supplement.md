@@ -3,6 +3,8 @@ description: "DocForge: Add context, content, or direction to the pipeline mid-p
 argument-hint: "What to add: context for a section, content to include, corrections to the brief, additional research questions, etc."
 ---
 
+Read `workspace/.active-project` to determine the active project. If no active project is set, stop and tell the human: "No active project. Run `/df-ideation` to start a new project, or say 'switch to [project name]' to resume one."
+
 This command lets the human inject new context, content, or direction at any point in the pipeline. It updates the appropriate artifact(s) without restarting the pipeline.
 
 The human's input is: $ARGUMENTS
@@ -11,18 +13,18 @@ If no argument was provided, ask the human what they want to add and where it sh
 
 ## Determine What to Update
 
-Based on the input, update one or more of these files:
+Based on the input, update one or more of these files in the active project folder (`workspace/{project}/`):
 
-### Adding to the brief (`workspace/brief.md`)
+### Adding to the brief (`brief.md`)
 If the human provides new arguments, scope changes, structure notes, or author-specified content:
-- Read `workspace/brief.md`
+- Read `workspace/{project}/brief.md`
 - Add the new information to the appropriate section (Key Arguments, Structure Notes, Author-Specified Content, Scope, etc.)
 - Save the updated brief
 - Tell the human: "Brief updated. If a draft already exists, run `/df-edit` with instructions to incorporate the new brief content, or `/df-draft` to redraft."
 
-### Adding research context (`workspace/research.md`)
+### Adding research context (`research.md`)
 If the human provides new evidence, data, corrections to claims, or answers to open questions:
-- Read `workspace/research.md`
+- Read `workspace/{project}/research.md`
 - Add a new section `## Supplemental Research (added by author)` at the end
 - Include the human's additions with clear attribution
 - Save the updated research
@@ -30,15 +32,17 @@ If the human provides new evidence, data, corrections to claims, or answers to o
 
 ### Adding grounding files
 If the human mentions files they want to add to grounding:
-- Remind them to copy files to `workspace/grounding/`
+- Remind them to copy files to `workspace/{project}/grounding/`
 - Tell them: "After adding files, run `/df-edit` with instructions on how to use them, or `/df-draft` to redraft with the new grounding."
 
 ### Providing content for a specific section
 If the human provides specific content (code, definitions, examples, data tables) for a specific section:
-- Read `workspace/brief.md`
+- Read `workspace/{project}/brief.md`
 - Add or update the Author-Specified Content section with the new content and which section it belongs in
 - Save the updated brief
 - Tell the human: "Author-specified content added to brief. Run `/df-edit add the author-specified content from the brief to [section]` to incorporate it into the current draft."
+
+After any update, also update `workspace/{project}/PROJECT.md`: append to progress log noting what was supplemented.
 
 ## Rules
 

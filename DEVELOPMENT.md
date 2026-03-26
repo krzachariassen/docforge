@@ -21,7 +21,7 @@ Everything is markdown files.
 - **NO Python files.** Not even a script.
 - **NO package managers.** No `pyproject.toml`, no `requirements.txt`, no `package.json`.
 - **NO application code.** No source directories, no modules, no imports.
-- **NO database.** The `workspace/` directory IS the state.
+- **NO database.** The `workspace/` project folders ARE the state.
 - **NO CLI tool.** CLAUDE.md IS the interface.
 
 If you find yourself writing code, stop.
@@ -31,12 +31,20 @@ If you find yourself writing code, stop.
 ### The Orchestrator (CLAUDE.md)
 
 CLAUDE.md is the auto-routing orchestrator. On every interaction, it tells Claude to:
-1. Check `workspace/` state to determine the current pipeline stage
-2. Read the user's message to determine intent
-3. Route to the appropriate agent by reading its `AGENT.md`
-4. Act accordingly
+1. Resolve the active project by reading `workspace/.active-project`
+2. Read the project's `PROJECT.md` for context and state
+3. Check the project folder for artifacts to determine the current pipeline stage
+4. Read the user's message to determine intent
+5. Route to the appropriate agent by reading its `AGENT.md`
+6. After significant interactions, update `PROJECT.md` with progress
 
 The user never needs to remember slash commands — they just chat. The orchestrator figures out what to do.
+
+### Multi-Project Workspaces
+
+Each project lives in its own folder under `workspace/{slug}/`. Projects are fully isolated — their own brief, research, grounding, drafts, reviews, and final artifacts. The active project is tracked in `workspace/.active-project` (a plain text file containing the project slug).
+
+Every project has a `PROJECT.md` file that persists across sessions. It tracks metadata, current stage, progress log, key decisions, open items, and human preferences. This enables session resumption — a new Claude session can read `PROJECT.md` and pick up exactly where the last session left off.
 
 ### Agent Briefings
 
@@ -126,7 +134,9 @@ Changes take effect immediately — there's no build step.
 
 ## Adding a New Agent
 
-Not currently needed — the 6 agents cover the full pipeline. But if you want to add one:
+Not currently needed — the 7 agents cover the full pipeline. But if you want to add one:
 1. Create `.claude/agents/<name>/AGENT.md`
 2. Add a routing rule in CLAUDE.md
 3. Optionally create a `/df-<name>` command shortcut
+4. Ensure it reads from and writes to `workspace/{project}/` paths
+5. Add PROJECT.md update logic (stage, progress log) to the agent's process

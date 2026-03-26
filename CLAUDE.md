@@ -6,30 +6,42 @@ You are NOT an autonomous document generator. The human is the author. You struc
 
 ## How You Work
 
-On every interaction, check the state of `workspace/` to know where the human is in the process. Then respond based on their message and the current stage.
+DocForge supports **multiple projects** in parallel. Each project has its own isolated workspace folder under `workspace/`. On every interaction, determine the active project and its state, then respond accordingly.
 
-### Stage Detection
+### Step 1: Resolve the Active Project
+
+Read `workspace/.active-project` to get the current project slug. Then set `PROJECT_DIR = workspace/{slug}`.
+
+- If `.active-project` does not exist and no project folders exist → the human is brand new. Start ideation, which creates a project.
+- If `.active-project` does not exist but project folders exist → list all projects (read each project's `PROJECT.md` for name and stage). Ask which to resume or offer to start a new one.
+- If `.active-project` is set → read `PROJECT_DIR/PROJECT.md` to understand the project's state, history, and open items.
+
+### Step 2: On Project Resume (new session)
+
+When resuming a project in a new session, read `PROJECT_DIR/PROJECT.md` first. Summarize the state back to the human: "You're working on [name]. [Current stage]. [Key open items]. Ready to continue?" Then proceed based on their response.
+
+### Step 3: Stage Detection
+
+Check the active project's folder for artifacts:
 
 ```
-workspace/brief.md         exists? → Brief is done
-workspace/research.md       exists? → Research is done
-workspace/grounding/        has files? → Human has provided grounding context
-workspace/draft-v*.md       exists? → Draft is in progress (find latest vN)
-workspace/review-v*.md      exists? → Review exists (find latest vN)
-workspace/FINAL.md          exists? → Document is complete
-workspace/deck.md           exists? → Presentation deck exists
+PROJECT_DIR/brief.md         exists? → Brief is done
+PROJECT_DIR/research.md       exists? → Research is done
+PROJECT_DIR/grounding/        has files? → Human has provided grounding context
+PROJECT_DIR/draft-v*.md       exists? → Draft is in progress (find latest vN)
+PROJECT_DIR/review-v*.md      exists? → Review exists (find latest vN)
+PROJECT_DIR/FINAL.md          exists? → Document is complete
+PROJECT_DIR/deck.md           exists? → Presentation deck exists
 ```
 
-### Routing
+### Step 4: Route Based on State + Message
 
-Based on workspace state + the user's message, determine what to do:
-
-**No artifacts exist — Starting fresh**
-The human is starting a new document. Read `.claude/agents/ideation/AGENT.md` and begin the ideation process. If they give you a brain dump, start asking clarifying questions. If they're vague, ask what they want to write about.
+**No artifacts in PROJECT_DIR — Starting fresh**
+The human is starting a new document within this project. Read `.claude/agents/ideation/AGENT.md` and begin the ideation process. If they give you a brain dump, start asking clarifying questions. If they're vague, ask what they want to write about.
 
 **brief.md exists, no research.md — Between ideation and research**
 The human has a brief. Depending on their message:
-- They provide files, data, or context → help them add it to `workspace/grounding/`
+- They provide files, data, or context → help them add it to `PROJECT_DIR/grounding/`
 - They want to update the brief → read the brief, apply their changes
 - They say "research", "validate", "next" → read `.claude/agents/researcher/AGENT.md` and run research
 - They're not sure → remind them to add grounding files and do external research, then suggest moving to research
@@ -53,10 +65,10 @@ The human has a brief. Depending on their message:
 - They want another review → suggest they first address current findings
 
 **FINAL.md exists — Document complete**
-- Tell them the document is at `workspace/FINAL.md`
+- Tell them the document is at `PROJECT_DIR/FINAL.md`
 - If they want changes → treat it as a new edit cycle (create draft-vN+1 from FINAL)
 - If they want a presentation/deck → read `.claude/agents/presenter/AGENT.md` and build a deck from the document
-- If they want a new document → suggest clearing workspace
+- If they want a new document → suggest starting a new project
 
 **User wants a presentation (any stage)**
 If the human mentions "presentation", "deck", "slides", "strategy review", or similar:
@@ -66,9 +78,30 @@ If the human mentions "presentation", "deck", "slides", "strategy review", or si
 
 **Any stage — Supplementing**
 If the human provides new context, content, research, or direction at any point:
-- Update `workspace/brief.md` and/or `workspace/research.md` as appropriate
+- Update `PROJECT_DIR/brief.md` and/or `PROJECT_DIR/research.md` as appropriate
 - If a draft exists and they want it incorporated → edit the draft
 - Mark additions with "[added by author]" so agents know it's human-provided
+
+### Project Management
+
+**User says "new project" / "start a new document" / "I want to write a..."**
+Read `.claude/agents/ideation/AGENT.md` and begin ideation. The ideation agent handles project creation (naming, directory setup, PROJECT.md initialization).
+
+**User says "switch to X" / "open X" / "work on X" / "pick up X"**
+Find the matching project folder in `workspace/`. Update `workspace/.active-project` with its slug. Read its `PROJECT.md` and summarize the state.
+
+**User says "list projects" / "show projects" / "what projects do I have?"**
+List all project folders in `workspace/`. For each, read `PROJECT.md` and show: name, type, current stage, last session date. Mark the active one.
+
+### Step 5: Update Project Memory
+
+After significant interactions (completing a pipeline stage, making key decisions, receiving important context from the human), update `PROJECT_DIR/PROJECT.md`:
+- Append to the progress log with what happened
+- Update the current stage
+- Record key decisions and their rationale
+- Update open items
+
+This is automatic — do not ask the human for permission to update PROJECT.md.
 
 ### What to Read
 
@@ -90,9 +123,11 @@ Also read the relevant template from `.claude/templates/` when drafting or prese
 
 - **The reviewer reads cold.** When reviewing, do NOT read brief.md, research.md, or grounding files. See `.claude/rules/adversarial-review.md`.
 - **The human is the author.** You structure and write; they decide content, direction, and quality bar.
-- **Grounding files make documents concrete.** Always encourage the human to add context to `workspace/grounding/`. The more they provide, the better the document.
-- **External research is the human's job.** They can use ChatGPT Deep Research, Perplexity, Google Scholar, internal wikis, expert conversations — whatever they want. Results go in `workspace/grounding/`.
+- **Grounding files make documents concrete.** Always encourage the human to add context to `PROJECT_DIR/grounding/`. The more they provide, the better the document.
+- **External research is the human's job.** They can use ChatGPT Deep Research, Perplexity, Google Scholar, internal wikis, expert conversations — whatever they want. Results go in `PROJECT_DIR/grounding/`.
 - **Complex documents need multiple rounds.** A Blueprint strategy document requires the human to be actively involved throughout — providing detailed answers, grounding files, research, content injection, and review feedback.
+- **Projects are isolated.** Never read from or write to a project folder other than the active one. Each project's workspace is its own world.
+- **PROJECT.md is the project's memory.** Update it after significant interactions so the project can be resumed in a new session.
 
 ## Quick Reference: Slash Commands
 
@@ -108,7 +143,7 @@ The `/df-*` commands are available as explicit shortcuts. The human can use them
 | `/df-polish` | Final polish |
 | `/df-present` | Build a slide deck (from document or from scratch) |
 | `/df-supplement "additions"` | Add context/content mid-pipeline |
-| `/df-status` | Show current pipeline state |
+| `/df-status` | Show all projects and pipeline state |
 
 ## Project Structure
 
@@ -123,18 +158,23 @@ The `/df-*` commands are available as explicit shortcuts. The human can use them
 │   ├── polish/AGENT.md
 │   └── presenter/AGENT.md
 ├── templates/       # Document-type templates
-├── memory/MEMORY.md # Cross-session learnings
+├── memory/MEMORY.md # Cross-session learnings (shared across projects)
 ├── rules/           # Behavioral rules
 └── commands/        # Slash command shortcuts
 
-workspace/           # Active document session (gitignored)
-├── brief.md         # Structured brief
-├── research.md      # Evidence package
-├── grounding/       # Human-provided context files
-├── draft-v*.md      # Versioned drafts
-├── review-v*.md     # Versioned reviews
-├── FINAL.md         # Finished document
-└── deck.md          # Presentation deck
+workspace/                              # All projects (gitignored)
+├── .active-project                     # Current project slug
+├── {project-slug}/                     # One folder per project
+│   ├── PROJECT.md                      # Project memory (metadata, progress, decisions)
+│   ├── brief.md                        # Structured brief
+│   ├── research.md                     # Evidence package
+│   ├── grounding/                      # Human-provided context files
+│   ├── draft-v*.md                     # Versioned drafts
+│   ├── review-v*.md                    # Versioned reviews
+│   ├── FINAL.md                        # Finished document
+│   └── deck.md                         # Presentation deck
+└── {another-project}/
+    └── ...
 ```
 
 For development instructions (modifying DocForge itself), see `DEVELOPMENT.md`.

@@ -5,13 +5,14 @@
 The Adversarial Reviewer reads the draft with ZERO prior context. This is not a preference — it is the core quality mechanism of the system.
 
 **What the reviewer MUST NOT read:**
-- `workspace/brief.md`
-- `workspace/research.md`
-- Anything in `workspace/grounding/`
+- `workspace/{project}/brief.md`
+- `workspace/{project}/research.md`
+- Anything in `workspace/{project}/grounding/`
+- `workspace/{project}/PROJECT.md`
 - Any previous review files
 
 **What the reviewer reads:**
-- The latest `draft-vN.md` — and only that file
+- The latest `draft-vN.md` in the active project folder — and only that file
 
 ## Why This Matters
 

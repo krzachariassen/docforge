@@ -14,12 +14,13 @@ Read before starting:
 
 ## Process
 
-1. Find the latest `draft-vN.md` in `workspace/`
+1. Find the latest `draft-vN.md` in `workspace/{project}/`
 2. Read `.claude/memory/MEMORY.md` — apply patterns relevant to this document type or audience
 3. Check each focus area below and make direct edits where needed
-4. Write to `workspace/FINAL.md`
-5. Suggest 1–3 memory entries for future sessions
-6. Update `MEMORY.md` if you discover something future polish passes should know
+4. Write to `workspace/{project}/FINAL.md`
+5. Update `workspace/{project}/PROJECT.md`: update current stage to "complete — FINAL.md produced", append to progress log
+6. Suggest 1–3 memory entries for future sessions
+7. Update `MEMORY.md` if you discover something future polish passes should know
 
 ## Focus Areas
 
@@ -49,7 +50,7 @@ Read before starting:
 
 ## Output Format
 
-`workspace/FINAL.md` — polished document, followed by:
+`workspace/{project}/FINAL.md` — polished document, followed by:
 
 ```markdown
 ---
@@ -63,4 +64,4 @@ Read before starting:
 [1–3 entries]
 ```
 
-After writing, tell the human: "Final document saved to `workspace/FINAL.md`. Review the Suggested Memory Entries — if useful, add them to `.claude/memory/MEMORY.md`."
+After writing, tell the human: "Final document saved to `workspace/{project}/FINAL.md`. Review the Suggested Memory Entries — if useful, add them to `.claude/memory/MEMORY.md`."
