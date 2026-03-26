@@ -13,6 +13,7 @@ Check `workspace/` for the following files and report status:
 | `workspace/review-v1.md` | exists / missing |
 | [any additional draft-vN / review-vN] | exists |
 | `workspace/FINAL.md` | exists / missing |
+| `workspace/deck.md` | exists / missing |
 
 Then determine the current stage and recommended next command:
 
@@ -22,7 +23,8 @@ Then determine the current stage and recommended next command:
 - **draft exists, no matching review** → Run `/df-review` (or `/df-review structural` / `substance` / `audience` for a focused review)
 - **review exists, no newer draft** → Read `workspace/review-vN.md`, then run `/df-edit "your feedback"` — you can accept/reject findings AND add new content
 - **multiple drafts, no FINAL.md** → Run `/df-review` for another cycle, or `/df-polish` if content is ready
-- **FINAL.md exists** → Pipeline complete. Document at `workspace/FINAL.md`
+- **FINAL.md exists, no deck** → Pipeline complete. Document at `workspace/FINAL.md`. Run `/df-present` to build a slide deck, or `/df-present strategy-review` for a leadership review deck.
+- **deck.md exists** → Presentation deck ready at `workspace/deck.md`
 
 **At any point**: Run `/df-supplement` to add context, content, or direction to the pipeline.
 
