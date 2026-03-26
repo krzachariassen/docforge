@@ -15,8 +15,8 @@ Read before starting:
 
 ## Process
 
-1. Read `workspace/brief.md`
-2. Read all files in `workspace/grounding/` (skip `.gitkeep`) — these contain internal context the human has provided
+1. Read `workspace/{project}/brief.md`
+2. Read all files in `workspace/{project}/grounding/` (skip `.gitkeep`) — these contain internal context the human has provided
 3. Identify **every major claim** in the Thesis and Key Arguments that needs validation. For simple documents this may be 3–5 claims. For complex documents (strategy, vision), validate every substantive claim — often 8–15.
 4. For each claim:
    - Supporting evidence (specific companies, examples, data points)
@@ -28,8 +28,9 @@ Read before starting:
 6. Identify blind spots — things the brief doesn't mention but the document should address. For strategy documents, specifically check for: governance, security implications, failure modes, team capacity constraints, migration/rollback concerns
 7. Write a Market Context section: how does this direction align with or diverge from industry trends?
 8. Assess whether the grounding context is sufficient for the drafter. If critical context is missing, say what the human should add.
-9. Write to `workspace/research.md`
-10. Update `MEMORY.md` if you discover something future research sessions should know
+9. Write to `workspace/{project}/research.md`
+10. Update `workspace/{project}/PROJECT.md`: update current stage to "research complete", append to progress log
+11. Update `MEMORY.md` if you discover something future research sessions should know
 
 ## Rules
 
@@ -41,11 +42,11 @@ Read before starting:
 - **Validate ALL substantive claims, not just the top 3–5.** A strategy document with 15 claims needs 15 validations. Skipping claims means unvalidated assertions in the final document.
 - **Use grounding files as evidence.** If the human provided internal data, reference it. "Per the system inventory in grounding/claude-md-audit.md, the current CLAUDE.md is 381 lines" is stronger than "the document claims the CLAUDE.md is large."
 - **Flag what's missing.** If the brief makes claims about internal systems and no grounding file supports them, tell the human what to provide.
-- **Use external research the human provides.** The human may add external research to `workspace/grounding/` — from ChatGPT Deep Research, Perplexity, Google Scholar, internal wikis, industry reports, or conversations with experts. Treat these as first-class evidence. Reference them by filename.
+- **Use external research the human provides.** The human may add external research to the project's `grounding/` folder — from ChatGPT Deep Research, Perplexity, Google Scholar, internal wikis, industry reports, or conversations with experts. Treat these as first-class evidence. Reference them by filename.
 
 ## Output Format
 
-`workspace/research.md`:
+`workspace/{project}/research.md`:
 
 ```markdown
 # Research & Evidence Package
@@ -88,12 +89,12 @@ Read before starting:
 
 After writing, tell the human:
 
-"Research saved to `workspace/research.md`.
+"Research saved to `workspace/{project}/research.md`.
 
-[If grounding is insufficient]: **Before drafting, please add these to `workspace/grounding/`:** [list missing items]. Without them, the drafter will have to make assumptions about [specific areas].
+[If grounding is insufficient]: **Before drafting, please add these to `workspace/{project}/grounding/`:** [list missing items]. Without them, the drafter will have to make assumptions about [specific areas].
 
 [If grounding is sufficient]: Your grounding context looks solid. Run `/df-draft` when ready.
 
-**External research**: If your document needs current industry data, competitor analysis, or market context beyond what I could validate, do your own research — ChatGPT Deep Research, Perplexity, Google Scholar, internal wikis, expert conversations — and add the results to `workspace/grounding/`. The drafter will use them as first-class evidence.
+**External research**: If your document needs current industry data, competitor analysis, or market context beyond what I could validate, do your own research — ChatGPT Deep Research, Perplexity, Google Scholar, internal wikis, expert conversations — and add the results to `workspace/{project}/grounding/`. The drafter will use them as first-class evidence.
 
 You can also run `/df-supplement` at any time to add more context to the brief or research."

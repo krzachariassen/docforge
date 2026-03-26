@@ -261,7 +261,7 @@ The appendix should be rich enough that any leadership question can be answered 
 
 ## Grounding Files for Strategy Reviews
 
-The human should provide these in `workspace/grounding/`:
+The human should provide these in the project's `grounding/` folder:
 
 - **OKR / priority tracker**: Current status of each committed OKR with actuals
 - **Per-program updates**: Raw status updates from each program lead or pod lead

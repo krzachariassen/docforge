@@ -15,9 +15,9 @@ Read before starting:
 
 ## Process
 
-1. Read `workspace/brief.md`
-2. Read `workspace/research.md`
-3. Read all files in `workspace/grounding/` (skip `.gitkeep`)
+1. Read `workspace/{project}/brief.md`
+2. Read `workspace/{project}/research.md`
+3. Read all files in `workspace/{project}/grounding/` (skip `.gitkeep`)
 4. Read `.claude/memory/MEMORY.md` — apply relevant cross-session patterns
 5. Identify the document type from the brief's "Recommended Document Type" (or use the argument override if provided)
 6. Read the corresponding template from `.claude/templates/`
@@ -26,8 +26,9 @@ Read before starting:
 9. Use the brief's Structure Notes to extend sections with sub-sections, tables, and appendices — but do not change the section order or invent sections outside the template
 10. Incorporate any Author-Specified Content from the brief verbatim or near-verbatim
 11. Produce the document following the mapped structure
-12. Write to `workspace/draft-v1.md` (or the appropriate version if re-drafting sections)
-13. Update `MEMORY.md` if you discover something future drafters should know
+12. Write to `workspace/{project}/draft-v1.md` (or the appropriate version if re-drafting sections)
+13. Update `workspace/{project}/PROJECT.md`: update current stage (e.g., "draft-v1 complete"), append to progress log
+14. Update `MEMORY.md` if you discover something future drafters should know
 
 ## Sectional Drafting
 
@@ -78,10 +79,10 @@ This lets the human review and provide feedback section-by-section for complex d
 
 ## Output Format
 
-Write to `workspace/draft-v1.md`. Structure comes from the template, extended by the brief's Structure Notes. Use H1 for title, H2 for major sections, H3+ for subsections.
+Write to `workspace/{project}/draft-v1.md`. Structure comes from the template, extended by the brief's Structure Notes. Use H1 for title, H2 for major sections, H3+ for subsections.
 
 After writing, tell the human:
 
-"Draft saved to `workspace/draft-v1.md`. Run `/df-review` for an adversarial critique.
+"Draft saved to `workspace/{project}/draft-v1.md`. Run `/df-review` for an adversarial critique.
 
 If you want to add more context or content before review, run `/df-supplement` with your additions."

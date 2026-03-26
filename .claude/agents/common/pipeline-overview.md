@@ -2,38 +2,45 @@
 
 DocForge is a multi-stage document writing pipeline. Each stage is a separate Claude Code command that invokes a specific agent. The human orchestrates the flow by running commands in sequence — and contributes context, content, and judgment throughout.
 
+All artifacts for a project live in `workspace/{project}/`. See `workspace-layout.md` for the full directory structure.
+
 ## The Human's Role
 
 DocForge is a collaboration framework, not an autonomous document generator. The quality of the final document depends directly on what the human puts in:
 
 - **Ideation**: The human provides the raw thinking and answers clarifying questions. More detailed answers = richer brief.
-- **Grounding & research**: The human copies relevant files into `workspace/grounding/` — existing docs, system inventories, metrics, and their own external research (from ChatGPT Deep Research, Perplexity, Google Scholar, internal wikis, expert conversations, or any other source). This is what makes documents concrete instead of generic.
+- **Grounding & research**: The human copies relevant files into the project's `grounding/` folder — existing docs, system inventories, metrics, and their own external research (from ChatGPT Deep Research, Perplexity, Google Scholar, internal wikis, expert conversations, or any other source). This is what makes documents concrete instead of generic.
 - **Reviewing**: The human reads the adversarial review, decides what to accept/reject, and adds their own feedback.
-- **Editing**: The human talks to the editor like a normal AI conversation — "expand this section", "add a governance section with these details", "here's the data for the metrics table". The editor handles both finding-level fixes and author-directed content. For large amounts of content, the human can also add a file to `workspace/grounding/` (e.g., `author-content.md`) and tell the editor to incorporate it.
-- **Memory**: The human curates what goes into cross-session memory.
+- **Editing**: The human talks to the editor like a normal AI conversation — "expand this section", "add a governance section with these details", "here's the data for the metrics table". The editor handles both finding-level fixes and author-directed content. For large amounts of content, the human can also add a file to the project's `grounding/` folder (e.g., `author-content.md`) and tell the editor to incorporate it.
+- **Memory**: The human curates what goes into cross-session memory (`.claude/memory/MEMORY.md`). Per-project memory (`PROJECT.md`) is updated automatically.
 
-For complex documents (strategies, visions), expect the human to be actively involved throughout. A strategy document written with minimal human input will be thin. One written with the human contributing context, research, and specific content at every stage will be publication-quality.
+For complex documents (strategies, visions), expect the human to be actively involved throughout.
 
 ## Pipeline Stages
 
+All paths below are relative to the active project folder (`workspace/{project}/`).
+
 | Command | Agent | Input | Output |
 |---------|-------|-------|--------|
-| `/df-ideation` | Ideation Partner | Human's brain dump | `workspace/brief.md` |
-| `/df-research` | Research Agent | `brief.md` + `grounding/*` | `workspace/research.md` |
-| `/df-draft` | Drafter | `brief.md` + `research.md` + `grounding/*` | `workspace/draft-v1.md` |
-| `/df-review` | Adversarial Reviewer | Latest `draft-vN.md` ONLY | `workspace/review-vN.md` |
-| `/df-edit` | Editor | Latest draft + human feedback | `workspace/draft-vN+1.md` |
-| `/df-polish` | Polish Agent | Latest draft + `memory/MEMORY.md` | `workspace/FINAL.md` |
+| `/df-ideation` | Ideation Partner | Human's brain dump | `PROJECT.md` + `brief.md` |
+| `/df-research` | Research Agent | `brief.md` + `grounding/*` | `research.md` |
+| `/df-draft` | Drafter | `brief.md` + `research.md` + `grounding/*` | `draft-v1.md` |
+| `/df-review` | Adversarial Reviewer | Latest `draft-vN.md` ONLY | `review-vN.md` |
+| `/df-edit` | Editor | Latest draft + human feedback | `draft-vN+1.md` |
+| `/df-polish` | Polish Agent | Latest draft + `memory/MEMORY.md` | `FINAL.md` |
+| `/df-present` | Presentation Architect | `FINAL.md` or brain dump | `deck.md` |
 | `/df-supplement` | (utility) | Human's additions | Updates `brief.md` or `research.md` |
-| `/df-status` | (utility) | — | Pipeline status + next step |
+| `/df-status` | (utility) | — | All projects + pipeline state |
 
 ## Key Constraints
 
 - **The reviewer reads cold.** It sees only the draft — no brief, no research, no grounding files. This is the most important architectural rule in the system.
 - **The human decides what feedback to accept.** Review findings pass through human judgment before reaching the editor.
-- **The workspace is the state.** All artifacts are markdown files in `workspace/`. No database.
+- **The project folder is the state.** All artifacts are markdown files in `workspace/{project}/`. No database.
+- **PROJECT.md is the project's memory.** Updated automatically after significant interactions so the project can be resumed in any session.
 - **Memory accumulates over time.** The Polish Agent suggests learnings; humans decide what goes into `.claude/memory/MEMORY.md`.
 - **Complex documents need multiple human touchpoints.** The pipeline supports mid-process context injection via `/df-supplement` and content-rich feedback to the editor.
+- **Projects are isolated.** Never read from or write to a different project's folder.
 
 ## Review Loop
 

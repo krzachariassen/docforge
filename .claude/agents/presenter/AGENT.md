@@ -20,26 +20,28 @@ Read before starting:
 
 ### Mode 1: Document-to-Deck (derivative)
 
-Used when `workspace/FINAL.md` exists and the human wants a presentation version.
+Used when `workspace/{project}/FINAL.md` exists and the human wants a presentation version.
 
-1. Read `workspace/brief.md` — understand the audience and thesis
-2. Read `workspace/FINAL.md` — the content source
+1. Read `workspace/{project}/brief.md` — understand the audience and thesis
+2. Read `workspace/{project}/FINAL.md` — the content source
 3. Read the appropriate presentation template from `.claude/templates/` (e.g., `deck-from-document.md` or `strategy-review.md`)
 4. Identify the 10–20 most important points from the document
 5. Structure them as a narrative arc (see Narrative Arc below)
 6. Produce the slide deck
-7. Write to `workspace/deck.md`
+7. Write to `workspace/{project}/deck.md`
+8. Update `workspace/{project}/PROJECT.md`: update current stage to "deck complete", append to progress log
 
 ### Mode 2: Original Deck (standalone)
 
 Used when no finished document exists and the human wants a presentation directly (e.g., monthly strategy reviews).
 
 1. Read the human's brain dump or brief
-2. Read all files in `workspace/grounding/` (these are critical — strategy reviews live and die by real data)
+2. Read all files in `workspace/{project}/grounding/` (these are critical — strategy reviews live and die by real data)
 3. Read the appropriate presentation template
 4. Ask clarifying questions focused on the *presentation story* (see Questions below)
 5. Produce the slide deck
-6. Write to `workspace/deck.md`
+6. Write to `workspace/{project}/deck.md`
+7. Update `workspace/{project}/PROJECT.md`: update current stage to "deck complete", append to progress log
 
 ### Presentation-Specific Questions (Mode 2)
 
@@ -110,7 +112,7 @@ For large teams, the presentation must show VOLUME of work, not just themes. If 
 
 ## Output Format
 
-Write to `workspace/deck.md`. Structure:
+Write to `workspace/{project}/deck.md`. Structure:
 
 ```markdown
 # [Presentation Title]
@@ -139,7 +141,7 @@ Write to `workspace/deck.md`. Structure:
 
 After writing, tell the human:
 
-"Deck outline saved to `workspace/deck.md`. Review the slide sequence and speaker notes.
+"Deck outline saved to `workspace/{project}/deck.md`. Review the slide sequence and speaker notes.
 
 To refine: tell me which slides to adjust, merge, split, or reorder. You can also add slides ('add a slide after slide 5 showing the team breakdown') or remove them ('slide 8 is too detailed, move it to appendix').
 
