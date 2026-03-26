@@ -1,168 +1,261 @@
 # Strategy Review Deck Template
 
-For recurring leadership presentations: monthly/quarterly strategy reviews, org-level status updates, portfolio reviews with senior directors or VPs.
+For recurring leadership presentations: monthly strategy reviews with senior directors, quarterly portfolio reviews, org-level status updates.
 
-This template is designed for **large teams (20-40+ people)** where the primary challenge is making the volume and breadth of work visible. A 30-person org that presents like a 10-person team has a communication problem, not a delivery problem.
+**Meeting format**: 1 hour. ~25 content slides + 5-10 appendix slides. One slide per 2 minutes of speaking, with room for questions and 1-2 deep dives.
 
-**Audience**: Senior Director, VP, or equivalent. They want: (1) Are we on track? (2) What moved? (3) What's at risk? (4) What do you need from me? They have 30-60 minutes and will interrupt with questions.
+**Audience**: Senior Director or equivalent. They want: (1) Are we on track? (2) What moved? (3) What's at risk? (4) What do you need from me? They will interrupt with questions.
 
-**Typical slide count**: 15-25 content slides + 5-10 appendix slides for a 30-minute review. One slide per 2 minutes of speaking time.
-
-**Human contribution required**: This template requires the MOST human input of any DocForge output. The human must provide: team-level updates from each workstream, metric snapshots (dashboards, scorecards), specific wins and deliverables, risk assessments, and the narrative they want to tell. Without this grounding, the deck will be generic and unconvincing.
-
-> **NOTE**: This is an initial template. It will be refined with real strategy review examples and feedback. Treat it as a strong starting point, not a final format.
+**Core challenge this template solves**: Large teams (20-40+ people) that present like small teams. If leadership can't see the volume and breadth of work, they'll undervalue the org regardless of what shipped. This template forces visibility.
 
 ---
 
 ## Deck Structure
 
-The strategy review follows a strict narrative order. **Do not reorder these sections.**
+The strategy review follows a strict narrative order. **Do not reorder these sections.** The sequence is: context → scorecard → headlines → programs → depth → forward look → ask.
 
-### OPENING (1-2 slides)
+### SECTION 1: OPENING (2 slides)
 
-#### Slide 1: Title + Agenda
-- Team/org name, review period, presenter name
-- Agenda as 4-5 bullets (one per section of the deck)
-- Set expectations: "30 minutes, questions throughout"
+#### Slide 1: Title
+- Team/org name, review period (month or quarter), presenter name
+- Keep it clean. One image or logo if appropriate. No clutter.
 
-#### Slide 2: TL;DR — The Headline
-The single most important message for this review. A claim, not a topic.
-- Good: "INCA Platform shipped 4 major initiatives and reduced KTLO by 40% in Q1"
-- Bad: "Q1 Update"
+#### Slide 2: Agenda with Time Allocations
+- List each section with allocated time
+- Name the deep dive topics explicitly so the audience knows what's coming
+- Example: "Scoreboard (10 min) · Highlights & Flags (10 min) · Programs (15 min) · Deep Dive: [Topic] (15 min) · Forward Look + Ask (10 min)"
 
-This slide sets the tone. If the Senior Director remembers one thing, it's this.
+Time allocations serve two purposes: they manage audience expectations, and they force the presenter to budget their own airtime. Without them, scoreboard discussion bleeds into everything.
 
-### SCOREBOARD (2-3 slides)
+---
 
-The scoreboard answers "are we on track?" before the audience has to ask.
+### SECTION 2: SCOREBOARD (3-4 slides)
 
-#### Slide 3: Priority Tracker
-A table showing every committed priority and its status:
+The scoreboard answers "are we on track?" before the audience has to ask. All data, no narrative. The story comes later.
 
-| Priority | Status | Key Metric | Target | Actual | Owner |
-|----------|--------|-----------|--------|--------|-------|
-| [Priority 1] | 🟢 On Track | [metric] | [target] | [actual] | [name] |
-| [Priority 2] | 🟡 At Risk | [metric] | [target] | [actual] | [name] |
-| ... | | | | | |
+#### Slide 3: OKR / Priority Tracker
 
-**This slide makes team size visible.** A 30-person org should show 6-10 priorities with different owners. If you're showing 2-3 priorities, you're presenting themes, not workstreams — and the audience will think you have a team of 8.
+The single most important slide in the deck. A table showing every committed priority and its status:
 
-**Speaker notes**: Walk through each row. Dwell on yellow/red items — the audience will ask about them anyway.
+| Objective | Key Result | Baseline | Target | Current | MoM Δ | Realized Impact | Owner |
+|-----------|-----------|----------|--------|---------|-------|----------------|-------|
+| [Objective 1] | [KR] | [start] | [goal] | [now] | [trend] | [what's banked] | [name] |
 
-#### Slide 4: Key Metrics Dashboard
-3-6 metrics that the Senior Director cares about, with trend indicators:
+**Critical columns:**
+- **MoM Δ** (month-over-month change): Shows trajectory, not just position. A metric at 5% that was 3% last month tells a different story than one that was 7%.
+- **Realized Impact**: Separates what's *shipped and measured* from what's *projected*. This is accountability — "we banked +14 bps from these two launches" vs. "we project +50 bps from the full roadmap."
+- **Owner**: Names make the org real. A 30-person team should show 6+ different owners. If you're showing 2-3 owners, you're presenting themes, not workstreams.
 
-| Metric | Last Review | Now | Trend | Target |
-|--------|------------|-----|-------|--------|
-| [metric 1] | [value] | [value] | ↑/↓/→ | [target] |
-| ... | | | | |
+**Format guidance**: One row per KR, grouped by objective. Use color or status indicators (🟢🟡🔴 or On Track / At Risk / Off Track). If a metric hasn't moved yet (0% → 0%), add a comment explaining when movement is expected — unexplained zeros erode confidence.
 
-Only include metrics you can explain. If a metric moved unexpectedly, have the explanation ready in speaker notes.
+#### Slide 4: Engineering Health (optional but recommended)
 
-#### Slide 5 (optional): Velocity / Volume Summary
-For large teams, a slide that shows the raw output volume:
-- PRs merged: X
-- Tickets resolved: Y (Z% automated)
-- Design docs written: N
-- On-call incidents handled: M
-- Teams unblocked: K
+One slide that makes team output and health visible:
 
-This slide exists specifically to combat the "feels like a team of 10" problem. 30 people produce volume — show it.
+| Metric | Last Review | Current | Trend | Benchmark |
+|--------|------------|---------|-------|-----------|
+| PRs merged | [N] | [N] | ↑/↓ | [Uber percentile if available] |
+| Tickets resolved (KTLO) | [N] | [N] | ↑/↓ | |
+| Support questions handled | [N] | [N] | ↑/↓ | |
+| On-call incidents | [N] | [N] | ↑/↓ | |
+| MTTD / MTTR | [time] | [time] | ↑/↓ | |
 
-### SUBSTANCE (5-10 slides)
+This slide exists to combat the "feels like a small team" problem. 30 people produce volume — PRs, tickets, support responses, on-call coverage. Show it. The Uber percentile benchmark (e.g., "p93 in diffs/SWE") gives external context that leadership values.
 
-The meat of the review. One section per top priority, 1-3 slides each.
+**When to include**: Always include if team size > 15 or if leadership has questioned productivity. Skip if the team is small enough that volume is self-evident.
 
-#### Per-Priority Deep-Dive (repeat for each major priority)
+**When to skip a metric**: Only show metrics that either (a) demonstrate strength or (b) show a clear improvement plan. A flat or declining metric without a story is worse than no metric.
 
-**Slide: [Priority Name] — [Claim about progress]**
-- What we committed to (from last review or the planning cycle)
-- What we delivered (specific deliverables, not vague progress)
-- Key metric (with before/after if available)
-- What's next (what this priority looks like by next review)
+#### Slide 5: Cost Health
 
-**For large or cross-functional initiatives**, add a second slide showing:
-- Team members involved (names or count)
-- Deliverables list (specific PRs, docs, launches — show volume)
-- Dependencies shipped or unblocked
+One slide covering platform/infrastructure cost:
 
-**For technical initiatives**, include:
-- Architecture diagram or data flow (if applicable)
-- Performance numbers (before/after latency, error rates, etc.)
+| Metric | Last Review | Current | Trend | Target |
+|--------|------------|---------|-------|--------|
+| [Primary cost metric, e.g., CPI] | [value] | [value] | ↑/↓ | [guardrail] |
+| [Secondary cost metric] | [value] | [value] | ↑/↓ | |
+| Total platform spend | [$] | [$] | ↑/↓ | |
 
-#### Cross-Cutting Work (1-2 slides)
+Include major cost movements: "Redis migration saved $X/month" or "New workload added $Y — within budget." If cost reporting is obscured by methodology issues (e.g., RI vs. RI-EXP), say so — leadership respects transparency about measurement challenges.
 
-Work that doesn't fit in a single priority but demonstrates org-level investment:
-- **Process improvements**: On-call rotation improvements, incident response changes, planning process upgrades
-- **Tooling investments**: Internal tools built, developer experience improvements
-- **People investments**: Hiring, mentoring, knowledge sharing, team structure changes
-- **Tech debt reduction**: Systems decommissioned, migrations completed, code health improvements
+**When to include**: Always include for infrastructure/platform teams. Cost is a first-class leadership concern — having it upfront prevents the surprise question that derails your narrative. For product teams with less direct infra ownership, this can be skipped or folded into a single line in the OKR table.
 
-This section makes invisible work visible. Most of a platform team's value is invisible to leadership unless you show it.
+---
 
-### RISKS & BLOCKERS (1-2 slides)
+### SECTION 3: SUMMARY — Ts / Bs / FLAGS (2-3 slides)
 
-#### Slide: What's At Risk
-A table — not a paragraph. For each risk:
+The T/B/Flag format is a proven structure for communicating headlines. Each item gets its own row — not crammed into dense table cells.
 
-| Risk | Impact | Likelihood | Mitigation | Need from leadership |
-|------|--------|-----------|------------|---------------------|
-| [risk 1] | [what happens] | H/M/L | [what we're doing] | [specific ask] |
+#### Slide 6: Tops & Bottoms
 
-The "need from leadership" column is what makes this actionable. Without it, you're just listing worries.
+| | Tops (wins) | | Bottoms (gaps) |
+|---|---|---|---|
+| T1 | [Specific achievement with impact] | B1 | [Specific gap with context] |
+| T2 | [Specific achievement with impact] | B2 | [Specific gap with context] |
+| T3 | [Specific achievement with impact] | | |
 
-#### Slide: Blockers (if any)
-Things that are actually blocking progress today — not risks, but current impediments:
-- What's blocked
-- Who is blocking it (diplomatically)
-- What resolution looks like
-- What you need from the Senior Director
+**Rules for Ts**: Be specific. Not "made progress on X" but "shipped X, measured Y impact." Name the project and the person. Include metrics where available.
 
-### NEXT MONTH / NEXT QUARTER (1-2 slides)
+**Rules for Bs**: Be honest. Not "slightly behind on X" but "X delayed 2 weeks because [reason]." Bottoms that are vague make leadership nervous — they assume you're hiding something.
+
+Aim for 3-5 Tops and 2-3 Bottoms per review. All Tops with no Bottoms is not credible.
+
+#### Slide 7: Flags
+
+Separate from Bs. Flags are forward-looking risks and blockers, not past performance.
+
+| Flag | Impact | What We Need |
+|------|--------|-------------|
+| [Risk/blocker] | [What happens if unresolved] | [Specific ask — decision, resources, escalation] |
+
+The "What We Need" column is what makes this actionable. Without it, you're listing worries. With it, you're giving leadership something to do. If a flag has no ask, it's informational — consider whether it belongs in the main deck or the appendix.
+
+---
+
+### SECTION 4: PROGRAM OVERVIEWS (8-12 slides)
+
+One section per program area / workstream / pod. For a 30-person org, expect 4-6 programs. Each program gets 2-3 slides.
+
+#### Per-Program Structure (repeat for each program)
+
+**Slide A: Program Summary**
+
+Combines T/B with priorities in a single slide:
+
+| Last Month Priorities | This Month Priorities | Flags |
+|----------------------|----------------------|-------|
+| ✅ [Completed] | [Priority 1] | [Flag if any] |
+| ✅ [Completed] | [Priority 2] | |
+| 🔄 [In progress] | [Priority 3] | |
+
+Plus a compact T/B for the program (2-3 Tops, 1-2 Bottoms).
+
+Checking off last month's priorities creates accountability. If something from last month isn't checked off and isn't called out, the audience will notice.
+
+**Slide B: Program OKR Table**
+
+Same format as the hero OKR table but scoped to this program:
+
+| KR | Baseline | Target | Current | MoM Δ | Realized Impact | Commentary |
+|----|----------|--------|---------|-------|----------------|------------|
+
+Include commentary for every KR — especially ones showing no movement. "No launches in Feb, impact expected in March" is better than a silent zero.
+
+**Slide C: Roadmap Sequencing (if needed)**
+
+Gantt-like table showing project timelines:
+
+| Project | Status | [Month 1] | [Month 2] | [Month 3] | [Month 4] | [Month 5] | [Month 6] | Comments |
+|---------|--------|-----------|-----------|-----------|-----------|-----------|-----------|---------|
+| [Project 1] | 🟢 | Dev | XP | Rollout | | | | |
+| [Project 2] | 🟡 | | Plan | Dev | Dev | XP | Rollout | Delayed from original Q1 target |
+| [Project 3] | ⚪ | | | Plan | Dev | Dev | Rollout | Not started |
+
+Use status indicators: 🟢 On Track, 🟡 At Risk, 🔴 Off Track, ⚪ Not Started. This format shows breadth (many projects = many people working) and timeline (realistic vs. aspirational).
+
+Include this slide for programs with 4+ active projects. For smaller programs, fold the timeline into the summary slide.
+
+---
+
+### SECTION 5: DEEP DIVES (5-8 slides)
+
+1-2 selected topics that deserve detailed attention. Not every program gets a deep dive — pick the 1-2 that are most impactful, most contentious, or most in need of a leadership decision.
+
+#### Deep Dive Structure
+
+Each deep dive follows one of these arcs:
+
+**For XP / experiment results:**
+1. Design (1 slide): What we tested, how, coverage
+2. Results (1-2 slides): Data tables, charts, key metrics
+3. Recommendation (1 slide): What we recommend and why
+
+**For technical decisions / architecture:**
+1. Problem (1 slide): What's broken, why it matters
+2. Options (1 slide): Comparison table with evaluation criteria
+3. Recommendation (1 slide): What we recommend, what we need to proceed
+
+**For project updates requiring attention:**
+1. Context (1 slide): Where we are, what changed
+2. Data (1-2 slides): Evidence supporting the story
+3. Ask (1 slide): What we need from leadership
+
+The deep dive ends with a clear **recommendation or ask**. If it doesn't end with one of those, it's informational — and informational content belongs in the appendix, not the main narrative.
+
+---
+
+### SECTION 6: FORWARD LOOK + ASK (2 slides)
 
 #### Slide: Commitments for Next Review
-A table of what you're committing to deliver by the next review:
 
 | Commitment | Target Date | Owner | Success Metric |
 |------------|------------|-------|---------------|
-| [commitment 1] | [date] | [name] | [how we'll know] |
+| [Commitment 1] | [date] | [name] | [how we'll know] |
 
-This creates accountability in both directions. The Senior Director sees what you're promising; you can reference this slide at the next review to show you delivered.
+This creates a forward contract. At the next review, reference this slide to show you delivered. The audience sees accountability in both directions.
 
-### ASK (1 slide)
+#### Slide: The Ask
 
-#### Slide: What We Need
-The single most important ask — headcount, budget, executive sponsorship, a decision, or just continued support. Be specific:
-- Good: "We need 2 additional senior engineers for Q2 to staff the event system migration (approved headcount, not filled)"
-- Bad: "We need more resources"
+The single most important thing you need from leadership. Be specific:
+- Good: "We need the remaining 2 approved headcount filled by April to staff the event migration — can you escalate with recruiting?"
+- Good: "We need a decision on whether to proceed with Option B by March 15 — the team is blocked until then."
+- Bad: "We need more resources."
+- Bad: "We need support."
 
-If you have no ask, this slide becomes "Key Takeaways" — 3 bullets that reinforce the headline from Slide 2.
+If you have no ask, this slide becomes **Key Takeaways** — 3 bullets reinforcing the headline story of this review. But try to have an ask. Leadership that isn't asked for anything assumes they aren't needed.
 
-### APPENDIX (5-10 slides)
+---
 
-The appendix is NOT filler. It's your depth. It proves you have command of the details when questioned. Include:
+### SECTION 7: APPENDIX (5-10 slides)
 
-- **Team-by-team breakdown**: What each sub-team delivered. One row per person or per sub-team.
-- **Detailed metric deep-dives**: Full dashboards, trend charts, methodology notes
-- **Project plans**: Gantt charts, milestone trackers, dependency maps
-- **Technical details**: Architecture diagrams, performance analysis, capacity planning
+The appendix is your depth. It proves you have command of the details. Include:
+
+- **Detailed per-program roadmaps**: Full Gantt tables that were too dense for the main deck
+- **Full OKR tables**: Every KR with history, not just the hero metrics
+- **Eng investment / work plan**: How engineering weeks are allocated across projects (by platform: iOS/Android/BE/Web) with % of team per project. This table makes team size VISIBLE.
 - **Incident summaries**: If relevant, a table of incidents with impact and resolution
+- **Metric deep-dives**: Full dashboards, trend charts, methodology notes
+- **Per-person or per-sub-team output**: What each sub-team or individual contributed
 
-The appendix should be rich enough that any question from the Senior Director can be answered by pulling up an appendix slide.
+The appendix should be rich enough that any leadership question can be answered by pulling up an appendix slide. "Great question — let me show you appendix slide 4."
+
+---
+
+## Adapting by Team Type
+
+### Infrastructure / Platform Teams
+- **Value metrics**: Adoption %, teams unblocked, developer time saved, migration progress, SLA improvements, incidents prevented. These replace $ revenue metrics.
+- **Cost slide**: Always include. Infrastructure cost is a first-class leadership concern.
+- **Engineering Health slide**: Strongly recommended — platform teams do invisible work (KTLO, on-call, support). Make it visible.
+- **Deep dives**: Tend toward technical decisions, migration progress, or reliability improvements rather than XP results.
+
+### Product Teams
+- **Value metrics**: GB impact, conversion rates, defect rates, user metrics with $ attribution where natural.
+- **Cost slide**: Optional — include if the team owns significant infra or if cost is a leadership concern.
+- **Deep dives**: Tend toward XP results with data analysis and recommendations.
+- **Competitive comparisons**: Include when available — "Instacart does X, we now do X+Y."
 
 ---
 
 ## Common Mistakes This Template Prevents
 
-1. **"Feels like a team of 10"**: The Priority Tracker (slide 3) forces you to show 6-10 workstreams with different owners. The Velocity Summary (slide 5) shows raw output volume. The per-priority deep-dives show deliverables, not themes.
+1. **"Feels like a team of 10"**: The OKR table shows 6+ owners. The Engineering Health slide shows volume. The per-program sections show breadth. The appendix work plan shows eng weeks per project.
 
-2. **No data**: The Metrics Dashboard (slide 4) forces quantification. Every priority has a key metric. Trends are shown, not claimed.
+2. **No data**: Every program has an OKR table. Every claim has a metric. MoM deltas show trajectory. Realized Impact separates shipped from projected.
 
-3. **All good news**: The Risks section forces honesty. The "need from leadership" column forces actionable asks. Senior Directors distrust reviews that are 100% green.
+3. **All good news**: The T/B format forces Bottoms. The Flags section forces forward-looking risks with asks. All-green reviews are not credible.
 
-4. **No accountability**: The Commitments slide (next review) creates a forward contract. The Priority Tracker references last review's commitments.
+4. **No accountability**: Last month's priorities are checked off (or not). Commitments are made for next review. Realized Impact shows what actually shipped vs. projected.
 
-5. **No depth**: The appendix proves you have detail without drowning the narrative in it.
+5. **No depth for Q&A**: The appendix has detailed roadmaps, work plans, and metric deep-dives ready for any question.
+
+6. **Topic titles instead of claim titles**: Slide titles should be claims ("KTLO Resolution Up 40%") not topics ("KTLO Update"). The audience should understand the story by reading only the titles.
+
+7. **Dense table cells with embedded paragraphs**: T/B items get their own rows. One point per row. If a cell needs line breaks, the content is too dense for a slide.
+
+8. **No ask**: The Ask slide forces a specific request. Leadership that isn't asked for anything assumes they aren't needed.
+
+9. **Overrunning time**: The agenda slide with time allocations forces budgeting. The template limits deep dives to 1-2 topics. Everything else goes in appendix.
 
 ---
 
@@ -170,20 +263,25 @@ The appendix should be rich enough that any question from the Senior Director ca
 
 The human should provide these in `workspace/grounding/`:
 
-- **Priority tracker / OKR status**: Current status of each committed priority
-- **Metric snapshots**: Screenshots or exports from dashboards showing key metrics
-- **Deliverable lists**: Per-team or per-person lists of what was shipped
-- **Incident reports**: If relevant to the review period
-- **Previous review deck**: So the presenter can show progress since last review
-- **Feedback from last review**: What the Senior Director said — this shapes the narrative
-- **Team roster**: Who is on the team, by sub-team, so the deck can show breadth
+- **OKR / priority tracker**: Current status of each committed OKR with actuals
+- **Per-program updates**: Raw status updates from each program lead or pod lead
+- **Metric snapshots**: Dashboard exports, trend data, key numbers
+- **Eng metrics**: PR counts, ticket resolution data, on-call stats, diffs/SWE percentile
+- **Cost data**: Infrastructure spend, CPI, cost changes from migrations or new workloads
+- **Previous review deck**: So the presenter can show progress vs. last review's commitments
+- **Feedback from last review**: What leadership said — this shapes the narrative
+- **Deep dive material**: Data, XP results, architecture options for the 1-2 deep dive topics
 
 ---
 
 ## Format Guidance
 
-- **Use tables aggressively.** Strategy reviews are inherently tabular — priorities, metrics, risks, commitments all have consistent dimensions. Tables show structure and volume simultaneously.
-- **Big numbers for wins.** "127 KTLO tickets resolved" as a full-slide number is more impactful than a bullet in a list.
-- **Before/after comparisons** for anything that changed. Side-by-side is the most convincing visual format for progress.
-- **Name people.** Putting owner names in the priority tracker and commitment table makes the org feel real — not a faceless team of 30.
-- **Speaker notes are critical.** The presenter needs talking points, data sources, and prepared answers for likely questions. Every slide should have speaker notes.
+- **Slide titles are claims, not topics.** "Shift Left Cut Structural Issues by 22%" not "Shift Left Update." If you read only the titles in sequence, you should understand the story.
+- **Use tables aggressively.** OKRs, priorities, roadmaps, T/B, flags, eng investment — all naturally tabular. Tables show structure and volume simultaneously.
+- **Big numbers for wins.** "127 tickets resolved" as a full-slide number is more impactful than a bullet in a list. Use when the number is surprising.
+- **Before/after for progress.** Side-by-side or MoM columns are the most convincing visual format.
+- **Name people.** Owner columns in OKR tables, commitment tables, and roadmaps make the org feel real.
+- **Speaker notes on every slide.** Talking points, data sources, likely questions, transitions. The presenter needs preparation, not just slides.
+- **Status indicators are visual shorthand.** 🟢🟡🔴 or On Track / At Risk / Off Track. The audience scans color before reading text.
+- **One message per slide.** If a slide makes two points, split it.
+- **Max 5 bullets per slide.** More than that, you need a table or another slide.
