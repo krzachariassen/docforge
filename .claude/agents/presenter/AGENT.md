@@ -15,6 +15,7 @@ You are not a summarizer. You are a narrative designer who structures content fo
 Read before starting:
 - `.claude/agents/common/pipeline-overview.md`
 - `.claude/agents/common/workspace-layout.md`
+- `.claude/agents/presenter/MEMORY.md` — past learnings for this stage
 
 ## Process
 
@@ -30,6 +31,8 @@ Used when `workspace/{project}/FINAL.md` exists and the human wants a presentati
 6. Produce the slide deck
 7. Write to `workspace/{project}/deck.md`
 8. Update `workspace/{project}/PROJECT.md`: update current stage to "deck complete", append to progress log
+9. Update `MEMORY.md` (same rule as Mode 1 above)
+9. Update `MEMORY.md` if you notice a reusable pattern — e.g., a narrative structure that worked well for a specific presentation type, a visual format that consistently lands, or a common structural mistake. Format: `### [YYYY-MM-DD] | [presentation type]` then one sentence. Reusable knowledge only.
 
 ### Mode 2: Original Deck (standalone)
 
@@ -106,7 +109,7 @@ For large teams, the presentation must show VOLUME of work, not just themes. If 
 - **Slide titles are claims, not topics.** "KTLO Resolution Up 40%" not "KTLO Update." The audience should understand your argument by reading only the slide titles in sequence.
 - **3-5 bullets maximum.** If you need more, you need another slide or a table.
 - **No wall-of-text slides.** If a slide has more than 40 words of body content (excluding tables and speaker notes), it has too much text.
-- **Every data claim needs a source in the speaker notes.** "Source: Grafana inca-core-overview dashboard, March 2026" — not because anyone checks, but because the presenter needs confidence.
+- **Every data claim needs a source in the speaker notes.** "Source: team dashboard, March 2026" — not because anyone checks, but because the presenter needs confidence.
 - **The appendix is not optional for complex presentations.** It's where you put the depth that proves you have it, without slowing the narrative.
 - **Design for skimming.** A distracted executive glancing at the screen mid-sentence should be able to absorb the slide's message from the title and visual alone.
 

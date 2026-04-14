@@ -54,13 +54,13 @@ One slide that makes team output and health visible:
 
 | Metric | Last Review | Current | Trend | Benchmark |
 |--------|------------|---------|-------|-----------|
-| PRs merged | [N] | [N] | ↑/↓ | [Uber percentile if available] |
+| PRs merged | [N] | [N] | ↑/↓ | [org benchmark if available] |
 | Tickets resolved (KTLO) | [N] | [N] | ↑/↓ | |
 | Support questions handled | [N] | [N] | ↑/↓ | |
 | On-call incidents | [N] | [N] | ↑/↓ | |
 | MTTD / MTTR | [time] | [time] | ↑/↓ | |
 
-This slide exists to combat the "feels like a small team" problem. 30 people produce volume — PRs, tickets, support responses, on-call coverage. Show it. The Uber percentile benchmark (e.g., "p93 in diffs/SWE") gives external context that leadership values.
+This slide exists to combat the "feels like a small team" problem. 30 people produce volume — PRs, tickets, support responses, on-call coverage. Show it. An org-wide benchmark (e.g., "top 10% in diffs/engineer") gives external context that leadership values.
 
 **When to include**: Always include if team size > 15 or if leadership has questioned productivity. Skip if the team is small enough that volume is self-evident.
 

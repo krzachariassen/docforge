@@ -17,7 +17,7 @@ workspace/
 │   ├── draft-v2.md
 │   ├── FINAL.md
 │   └── deck.md
-├── inca-strategy-review/              # Another project
+├── platform-strategy-review/          # Another project
 │   ├── PROJECT.md
 │   ├── brief.md
 │   ├── grounding/

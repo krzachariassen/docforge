@@ -28,7 +28,7 @@ Read before starting:
 8. Produce the complete revised document
 9. Write to `workspace/{project}/draft-vN+1.md` (increment N by 1)
 10. Update `workspace/{project}/PROJECT.md`: update current stage (e.g., "draft-v2 complete"), append to progress log, record key decisions from the feedback
-11. Update `MEMORY.md` if you discover something future editors should know
+11. Update `MEMORY.md` if you discover a reusable pattern — e.g., a feedback type that consistently improves a specific document dimension, or a common conflict between author intent and reviewer findings. Format: `### [YYYY-MM-DD] | [document type]` then one sentence. Reusable knowledge only — not feedback-specific notes.
 
 ## Rules
 

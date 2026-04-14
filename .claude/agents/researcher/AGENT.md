@@ -30,7 +30,7 @@ Read before starting:
 8. Assess whether the grounding context is sufficient for the drafter. If critical context is missing, say what the human should add.
 9. Write to `workspace/{project}/research.md`
 10. Update `workspace/{project}/PROJECT.md`: update current stage to "research complete", append to progress log
-11. Update `MEMORY.md` if you discover something future research sessions should know
+11. Update `MEMORY.md` if you discover a reusable pattern — e.g., a claim type that consistently lacks evidence, a blind spot category that specific document types always miss, or an evidence source that proves reliable. Format: `### [YYYY-MM-DD] | [document type]` then one sentence. Reusable knowledge only — not task-specific notes.
 
 ## Rules
 

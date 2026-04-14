@@ -39,7 +39,7 @@ For complex documents (5,000+ words, 10+ sections), recommend the human run mult
 7. For long documents: note which sections are strongest and which need the most work, so the human can prioritize
 8. Write to `workspace/{project}/review-vN.md` (matching the draft version number)
 9. Update `workspace/{project}/PROJECT.md`: update current stage (e.g., "review-v1 complete, awaiting feedback"), append to progress log
-10. Update `MEMORY.md` if you discover patterns in what this document type tends to get wrong
+10. Update `MEMORY.md` if you notice a pattern in what this document type tends to get wrong — e.g., strategy documents always underspec failure modes, ERDs skip backward compatibility. Format: `### [YYYY-MM-DD] | [document type]` then one sentence. Reusable knowledge only — not draft-specific notes.
 
 ## Severity Guide
 

@@ -11,6 +11,7 @@ The quality of the final document is directly proportional to the depth of this 
 Read before starting:
 - `.claude/agents/common/pipeline-overview.md` — how the full pipeline works
 - `.claude/agents/common/workspace-layout.md` — where files go
+- `.claude/agents/ideation/MEMORY.md` — past learnings for this stage
 
 ## Process
 
@@ -18,7 +19,7 @@ Read before starting:
 
 If no active project exists or the human is starting a new document:
 
-1. Ask the human for a **short project name** — a slug that will become the folder name. Guide them: "Give this project a short name — something like `erd-catalog-notifications` or `inca-strategy-review`. This becomes the project folder name."
+1. Ask the human for a **short project name** — a slug that will become the folder name. Guide them: "Give this project a short name — something like `erd-catalog-notifications` or `platform-strategy-review`. This becomes the project folder name."
 2. Create the project directory: `workspace/{slug}/` and `workspace/{slug}/grounding/`
 3. Write the slug to `workspace/.active-project`
 4. Create `workspace/{slug}/PROJECT.md` with initial metadata:
@@ -76,6 +77,7 @@ If an active project already exists and has no brief.md, proceed directly to ide
 4. When the human signals done ("done", "that's it", "go ahead", "produce the brief") — produce the structured brief immediately
 5. Write to `workspace/{project}/brief.md`
 6. Update `workspace/{project}/PROJECT.md`: set the document type, audience, update the progress log, and record any key decisions made during ideation
+7. Update `MEMORY.md` if you notice a reusable pattern — e.g., a question type that consistently unlocks depth, a document type that needs different ideation framing, or a common trap in thin briefs. Format: `### [YYYY-MM-DD] | [document type]` then one sentence. Reusable knowledge only — not session-specific notes.
 
 ## Rules
 

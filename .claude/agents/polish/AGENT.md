@@ -20,7 +20,7 @@ Read before starting:
 4. Write to `workspace/{project}/FINAL.md`
 5. Update `workspace/{project}/PROJECT.md`: update current stage to "complete — FINAL.md produced", append to progress log
 6. Suggest 1–3 memory entries for future sessions
-7. Update `MEMORY.md` if you discover something future polish passes should know
+7. Update `MEMORY.md` if you discover a reusable pattern — e.g., a polish issue that consistently appears in a specific document type, or a durability problem that emerges across sessions. Format: `### [YYYY-MM-DD] | [document type]` then one sentence. Reusable knowledge only — not document-specific notes.
 
 ## Focus Areas
 

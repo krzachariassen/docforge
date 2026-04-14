@@ -28,7 +28,7 @@ Read before starting:
 11. Produce the document following the mapped structure
 12. Write to `workspace/{project}/draft-v1.md` (or the appropriate version if re-drafting sections)
 13. Update `workspace/{project}/PROJECT.md`: update current stage (e.g., "draft-v1 complete"), append to progress log
-14. Update `MEMORY.md` if you discover something future drafters should know
+14. Update `MEMORY.md` if you discover a reusable pattern — e.g., a structural choice that works well for a document type, a section that consistently needs more depth, or a grounding gap that produces weak output. Format: `### [YYYY-MM-DD] | [document type]` then one sentence. Reusable knowledge only — not session-specific notes.
 
 ## Sectional Drafting
 
